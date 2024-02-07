@@ -63,8 +63,11 @@ const Card = ({ card }) => {
           backgroundPosition: "center",
         }}
         className="absolute inset-0 z-0 transition-transform duration-300 group-hover:scale-110"
+        
       ></div>
-      <div className="absolute inset-0 z-10 grid place-content-center">
+      <div className="absolute inset-0 z-10 grid place-content-center"
+           onClick={() => popup(card)}
+      >
         <p className="bg-gradient-to-br from-white/20 to-white/0 p-8 text-6xl font-black uppercase text-white backdrop-blur-lg">
           {card.title}
         </p>
@@ -72,6 +75,11 @@ const Card = ({ card }) => {
     </div>
   );
 };
+
+const popup = (card) => {
+  alert("Cool! " + card.title + " is a great choice!\n\
+  Please press the below button to Exit. Thank you! ⬇️")    
+}
 
 export default HorizontalScroll;
 
@@ -107,3 +115,5 @@ const cards = [
     id: 6,
   }
 ];
+
+
