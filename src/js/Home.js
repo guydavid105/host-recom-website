@@ -16,15 +16,17 @@ export function Home() {
                 {/* <img src={movie} alt="movie" height="80" ></img>
                 <img src={book} alt="book" height="80" ></img>
                 <img src={music} alt="music" height="80" ></img> */}
+            
             <Slideshow />
+
             <HorizontalScroll />
+
             <h2>Example audio</h2>
-            <audio src={music_mp3} autoplay="autoplay" controls loop="loop"></audio><br/>
+            <audio src={music_mp3} autoplay="autoplay" controls loop="loop"></audio>
 
             <h2>Try example subpage</h2> 
-            
             <HashLink to="/example"><i>Example Subpage</i></HashLink>
-            <br/>
+           
             <h2>Developer Notice Board</h2> 
             Change me from src/index.js <br/>
             Other subpages implemented at src/js/ <br/>

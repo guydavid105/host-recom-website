@@ -25,7 +25,8 @@ code {
 .slideshow {
   margin: 0 auto;
   overflow: hidden;
-  max-width: 350px;
+  /* change width  */
+  max-width: 150px;
 }
 
 .slideshowSlider {
@@ -35,7 +36,8 @@ code {
 
 .slide {
   display: inline-block;
-  height: 200px;
+  /* change height */
+  height: 100px;
   width: 100%;
   border-radius: 40px;
 }
@@ -61,7 +63,7 @@ code {
   background-color: #6a0dad;
 }
 
-/* More from Sliding Effect */
+/* Extra More from Sliding Effect */
 
 /*
 ! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com
@@ -277,22 +279,6 @@ select {
   text-transform: none;
 }
 
-/*
-1. Correct the inability to style clickable types in iOS and Safari.
-2. Remove default button styles.
-*/
-
-button,
-[type='button'],
-[type='reset'],
-[type='submit'] {
-  -webkit-appearance: button;
-  /* 1 */
-  background-color: transparent;
-  /* 2 */
-  background-image: none;
-  /* 2 */
-}
 
 /*
 Use the modern Firefox focus style for all focusable elements.
@@ -363,9 +349,9 @@ Remove the inner padding in Chrome and Safari on macOS.
 Add the correct display in Chrome and Safari.
 */
 
-summary {
+/* summary {
   display: list-item;
-}
+} */
 
 /*
 Removes the default spacing and border for appropriate elements.
@@ -373,7 +359,7 @@ Removes the default spacing and border for appropriate elements.
 
  
 
-fieldset {
+/* fieldset {
   margin: 0;
   padding: 0;
 }
@@ -388,7 +374,7 @@ menu {
   list-style: none;
   margin: 0;
   padding: 0;
-}
+} */
 
 /*
 Reset default styling for dialogs.
@@ -402,9 +388,9 @@ dialog {
 Prevent resizing textareas horizontally by default.
 */
 
-textarea {
+/* textarea {
   resize: vertical;
-}
+} */
 
 /*
 1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
@@ -423,10 +409,10 @@ textarea::placeholder {
 Set the default cursor for buttons.
 */
 
-button,
+/* button,
 [role="button"] {
   cursor: pointer;
-}
+} */
 
 /*
 Make sure disabled buttons don't get the pointer cursor.
@@ -441,7 +427,7 @@ Make sure disabled buttons don't get the pointer cursor.
 2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
    This can trigger a poorly considered lint error in some tools but is included by design.
 */
-
+/* 
 img,
 svg,
 video,
@@ -451,20 +437,18 @@ iframe,
 embed,
 object {
   display: block;
-  /* 1 */
   vertical-align: middle;
-  /* 2 */
-}
+} */
 
 /*
 Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
 */
 
-img,
+/* img,
 video {
   max-height: 100%;
   width: auto;
-}
+} */
 
 /* Make elements with the HTML hidden attribute stay hidden by default */
 

@@ -12,8 +12,11 @@ const HorizontalScroll = () => {
   
     <div className="bg-neutral-800">
       <div className="flex h-48 items-center justify-center">
+        <span className="font-semibold uppercase text-white">
+        Gallery View   &nbsp;
+        </span>
         <span className="font-semibold uppercase text-neutral-500">
-          Scroll down
+         [Scroll down]
         </span>
       </div>
       <HorizontalScrollCarousel />
