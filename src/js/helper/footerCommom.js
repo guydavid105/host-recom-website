@@ -1,4 +1,3 @@
- 
 export default function FooterCommon(){
     var myDate = new Date(document.lastModified);
     var myNewDate = new Intl.DateTimeFormat(

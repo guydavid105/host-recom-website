@@ -7,9 +7,9 @@ export function Example()
         <Top />
         <br></br>
         <center>
-        Example Webpage.
-        <br/><br/>
-        <a href="/">🏠HOME</a>
+            Example Webpage.
+            <br/><br/>
+            <a href="/">🏠HOME</a>
         </center>
         </>
     )

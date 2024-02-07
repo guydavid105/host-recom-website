@@ -7,9 +7,9 @@ export function NotFound()
         <Top />
         <br></br>
         <center>
-        Sorry the webpage you want to reach has been moved or doesn't exist. 
-        <br/><br/>
-        <a href="/">🏠HOME</a>
+            Sorry the webpage you want to reach has been moved or doesn't exist. 
+            <br/><br/>
+            <a href="/">🏠HOME</a>
         </center>
         </>
         

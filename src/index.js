@@ -7,7 +7,8 @@ import { Route,Routes, useLocation,HashRouter as Router} from 'react-router-dom'
 import { AnimatePresence } from "framer-motion";
 import {Home} from "./js/Home";
 import {NotFound} from "./js/404";
-import { Example } from './js/Example';
+import { Example } from './js/ExampleSubpage';
+import { ScrollToTop } from './js/helper/ScrollToTop';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

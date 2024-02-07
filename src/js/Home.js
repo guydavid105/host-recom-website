@@ -6,6 +6,7 @@ import {Slideshow} from './helper/slideShow';
 import { HashLink } from 'react-router-hash-link';
 import Footer from "./helper/Footer";
 import {Top} from "./helper/Top";
+import HorizontalScroll from "./helper/horizontalScroll";
 export function Home() { 
     return (
         <>
@@ -16,7 +17,7 @@ export function Home() {
                 <img src={book} alt="book" height="80" ></img>
                 <img src={music} alt="music" height="80" ></img>
             <Slideshow />
-            
+            <HorizontalScroll />
             <h2>Example audio</h2>
             <audio src={music_mp3} autoplay="autoplay" controls loop="loop"></audio><br/>
 

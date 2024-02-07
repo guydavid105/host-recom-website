@@ -1,12 +1,12 @@
+import React from 'react';
+
 import book from '../../asset/book.jpg';
 import music from '../../asset/music.jpg';
 import movie from '../../asset/movie.jpg';
-import React from 'react';
-const colors = ["#0088FE", "#FFBB28","#FF8042"];
 const pics = [movie, book, music];
+
+const colors = ["#0088FE", "#FFBB28","#FF8042"];
 const delay = 2500;
-
-
 
 export function Slideshow() {
   const [index, setIndex] = React.useState(0);
