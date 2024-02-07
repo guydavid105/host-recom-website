@@ -2,7 +2,8 @@ import book from '../../asset/book.jpg';
 import music from '../../asset/music.jpg';
 import movie from '../../asset/movie.jpg';
 import React from 'react';
-const colors = ["#0088FE", "#00C49F", "#FFBB28"];
+const colors = ["#0088FE", "#FFBB28","#FF8042"];
+const pics = [movie, book, music];
 const delay = 2500;
 
 
@@ -43,7 +44,9 @@ export function Slideshow() {
             className="slide"
             key={index}
             style={{ backgroundColor }}
-          ></div>
+          >
+            <img src={pics[index]} alt="book" width="100%" height="100%"/>
+          </div>
         ))}
       </div>
 
