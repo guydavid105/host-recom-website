@@ -2,40 +2,38 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import './App.css';
-import book from './asset/book.jpg';
-import music from './asset/music.jpg';
-import movie from './asset/movie.jpg';
+
+import { Route,Routes, useLocation,HashRouter as Router} from 'react-router-dom';
+import { AnimatePresence } from "framer-motion";
+import {Home} from "./js/Home";
+import {NotFound} from "./js/404";
+import { Example } from './js/Example';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
 function App() {
+  const location = useLocation();
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-        Movies x Books x Music Recommendation System!
-        </p>
-       
-        <img src={book} alt="book" height="200" ></img>
-        <img src={music} alt="music" height="180" ></img>
-        <img src={movie} alt="movie" height="160" ></img>
-
-        Dev Notice: 
-        Change me from src/index.js <br/>
-        Reference: <a href="https://reactjs.org">Learn React</a> <br/>
-
-      </header>
-    </div>
-  );
+  <> 
+      {/* <ScrollToTop> */}
+      <AnimatePresence mode='wait'>
+        <Routes key={location.pathname} location={location}>
+          <Route path="/" element={<Home />}/>
+          <Route path="/example" element={<Example />}/>
+          <Route path='/*' element={<NotFound />}/>
+        </Routes> 
+      </AnimatePresence>
+      {/* </ScrollToTop> */}
+      </>
+  )
 }
 
 root.render(
-  <React.StrictMode>
+  <Router hashType="noslash"> 
     <App />
+  </Router>
 
-  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
