@@ -1,8 +1,15 @@
 import { motion, useTransform, useScroll } from "framer-motion";
 import { useRef } from "react";
 
+// import "./output.css";
+
+// using tailwind css 
 const HorizontalScroll = () => {
+  <style>
+   
+</style>
   return (
+  
     <div className="bg-neutral-800">
       <div className="flex h-48 items-center justify-center">
         <span className="font-semibold uppercase text-neutral-500">
@@ -67,18 +74,33 @@ export default HorizontalScroll;
 
 const cards = [
   {
-    url: "../../asset/book.jpg",
+    url: "asset/book.jpg",
     title: "Book",
     id: 1,
   },
   {
-    url: "../../asset/movie.jpg",
+    url: "asset/movie.jpg",
     title: "Movie",
     id: 2,
   },
   {
-    url: "./asset/music.jpg",
+    url: "asset/music.jpg",
     title: "Music",
     id: 3,
+  },
+  {
+    url: "asset/book.jpg",
+    title: "Book",
+    id: 4,
+  },
+  {
+    url: "asset/movie.jpg",
+    title: "Movie",
+    id: 5,
+  },
+  {
+    url: "asset/music.jpg",
+    title: "Music",
+    id: 6,
   }
 ];

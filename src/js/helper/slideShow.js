@@ -5,7 +5,9 @@ import music from '../../asset/music.jpg';
 import movie from '../../asset/movie.jpg';
 const pics = [movie, book, music];
 
-const colors = ["#0088FE", "#FFBB28","#FF8042"];
+// const colors = ["#0088FE", "#FFBB28","#FF8042"];
+const colors = ["#FFFFFF", "#FFFFFF","#FFFFFF"];
+
 const delay = 2500;
 
 export function Slideshow() {
