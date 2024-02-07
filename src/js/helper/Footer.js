@@ -1,9 +1,8 @@
 import FooterCommon from "./footerCommom"
-export default function Blog_Footer(){
+export default function Footer(){
     return(
     <>
-    <br/><br/><br/>
-
+    <br></br>
     <hr width="50%" color="#987cb9" SIZE="1" />
         
         <table class="table_footer">

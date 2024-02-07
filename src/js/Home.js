@@ -4,16 +4,13 @@ import movie from '../asset/movie.jpg';
 import music_mp3 from '../asset/audio/Town_of_Windmill.mp3';
 import {Slideshow} from './helper/slideShow';
 import { HashLink } from 'react-router-hash-link';
-import Blog_Footer from "./helper/blog_footer";
-
+import Footer from "./helper/Footer";
+import {Top} from "./helper/Top";
 export function Home() { 
     return (
         <>
             <center>
-            <h1>
-            Movies x Books x Music Recommendation System!
-            </h1>
-            <i>Trust me, we are <b>the Best!</b> 🥇</i> 
+            <Top />
             <br/>
                 <img src={movie} alt="movie" height="80" ></img>
                 <img src={book} alt="book" height="80" ></img>
@@ -32,7 +29,7 @@ export function Home() {
             Reference: <a href="https://reactjs.org">Learn React</a> <br/>
             </center>
 
-            <Blog_Footer />
+            <Footer />
         </>
 
       );
