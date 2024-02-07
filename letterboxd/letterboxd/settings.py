@@ -17,7 +17,7 @@ NEWSPIDER_MODULE = "letterboxd.spiders"
 #USER_AGENT = "letterboxd (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = False
+ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -34,7 +34,7 @@ ROBOTSTXT_OBEY = False
 #COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
-TELNETCONSOLE_ENABLED = False
+#TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
 #DEFAULT_REQUEST_HEADERS = {
@@ -45,13 +45,13 @@ TELNETCONSOLE_ENABLED = False
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    "letterboxd.middlewares.letterboxdSpiderMiddleware": 543,
+#    "letterboxd.middlewares.LetterboxdSpiderMiddleware": 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    "letterboxd.middlewares.letterboxdDownloaderMiddleware": 543,
+#    "letterboxd.middlewares.LetterboxdDownloaderMiddleware": 543,
 #}
 
 # Enable or disable extensions
@@ -63,7 +63,7 @@ TELNETCONSOLE_ENABLED = False
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    "letterboxd.pipelines.letterboxdPipeline": 300,
+#    "letterboxd.pipelines.LetterboxdPipeline": 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)

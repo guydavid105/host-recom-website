@@ -8,6 +8,6 @@
 from itemadapter import ItemAdapter
 
 
-class letterboxdPipeline:
+class LetterboxdPipeline:
     def process_item(self, item, spider):
         return item
