@@ -113,7 +113,23 @@ const cards = [
     url: "asset/music.jpg",
     title: "Music",
     id: 6,
+  },  
+  {
+    url: "asset/book.jpg",
+    title: "Book",
+    id: 7,
+  },
+  {
+    url: "asset/movie.jpg",
+    title: "Movie",
+    id: 8,
   }
+  // ,
+  // {
+  //   url: "asset/music.jpg",
+  //   title: "Music",
+  //   id: 9,
+  // }
 ];
 
 
