@@ -28,3 +28,5 @@ __pycache__/
 # Ignore .html files
 *.html
 
+# Ignore log.txt
+log.txt

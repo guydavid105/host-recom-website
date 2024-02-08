@@ -11,24 +11,21 @@ class LetterboxdSpider(scrapy.Spider):
     
 
     def parse(self, response):
-        page = response.url.split("/")[-2]
-        filename = f"user-{page}.html"
-        Path(filename).write_bytes(response.body)
-        self.log(f"Saved file {filename}")
+        # Extract film information from the page:
+
+        # Film titles
+        film_titles = response.css('div.film-poster img::attr(alt)').getall()
 
 
-        # # Extract film information from the page
-        # film_titles = response.css('.poster-list .film-poster::attr(data-film-name)').getall()
-        # film_years = response.css('.poster-list .film-poster::attr(data-film-release-year)').getall()
+        # Process the extracted data
+        data = []
+        for title in film_titles:
+            yield {
+                'title': title,
+            }
+            data.append({'title': title})
 
-        # # Process the extracted data
-        # for title, year in zip(film_titles, film_years):
-        #     yield {
-        #         'title': title,
-        #         'year': year
-        #     }
-
-        # # Follow pagination links
-        # next_page = response.css('.paginate-next::attr(href)').get()
-        # if next_page is not None:
-        #     yield response.follow(next_page, self.parse)
+        # Follow pagination links
+        next_page = response.css('li.paginate-current + li a::attr(href)').get()
+        if next_page is not None:
+            yield response.follow(next_page, self.parse)
