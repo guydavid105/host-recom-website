@@ -30,3 +30,6 @@ __pycache__/
 
 # Ignore log.txt
 log.txt
+
+# Ignore JSON files
+*.json

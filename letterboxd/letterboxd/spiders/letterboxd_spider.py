@@ -1,5 +1,6 @@
 from pathlib import Path
 import scrapy
+import json
 
 class LetterboxdSpider(scrapy.Spider):
     name = 'letterboxd'
@@ -24,6 +25,11 @@ class LetterboxdSpider(scrapy.Spider):
                 'title': title,
             }
             data.append({'title': title})
+
+        # Store the data in a JSON file
+        filename = 'film_data.json'
+        with open(filename, 'w') as file:
+            json.dump(data, file)
 
         # Follow pagination links
         next_page = response.css('li.paginate-current + li a::attr(href)').get()
