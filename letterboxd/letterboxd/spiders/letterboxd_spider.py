@@ -16,13 +16,14 @@ class LetterboxdSpider(scrapy.Spider):
 
         # Film titles
         film_titles = response.css('div.film-poster img::attr(alt)').getall()
-
+        film_uid = response.css('div.film-poster::attr(data-film-id)').getall()
 
         # Process the extracted data
         data = []
-        for title in film_titles:
+        for title, film_uid in zip(film_titles, film_uid):
             yield {
                 'title': title,
+                'uid': film_uid,
             }
             data.append({'title': title})
 
