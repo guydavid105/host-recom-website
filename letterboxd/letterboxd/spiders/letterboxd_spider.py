@@ -27,14 +27,22 @@ class LetterboxdSpider(scrapy.Spider):
         film_titles = []
         film_uids = []
         film_ratings = []
+        film_imgs = []
         film_slugs = []
         for film in films:
             film_titles.append(film.css('div.film-poster img::attr(alt)').get())
-            film_uids.append(film.css('div.film-poster::attr(data-film-id)').get())
+
+            film_uid = film.css('div.film-poster::attr(data-film-id)').get()
+            film_uids.append(film_uid)
 
             film_slug = film.css('div.film-poster::attr(data-film-slug)').get()
             film_slugs.append(film_slug)
 
+            img_URL = 'https://a.ltrbxd.com/resized/film-poster/'
+            for char in film_uid:
+                img_URL = img_URL + char + '/'
+            img_URL = img_URL + film_uid + '-' + film_slug + '-0-500-0-750-crop.jpg'
+            film_imgs.append(img_URL)
 
             film_rating = film.css('p.poster-viewingdata span.rating::text').get()
             if film_rating:
@@ -56,14 +64,15 @@ class LetterboxdSpider(scrapy.Spider):
             data = json.load(file) # Should get an empty list, or list of dicts
         file.close()
         # Process the extracted data
-        for title, film_uid, film_rating, film_slug in zip(film_titles, film_uids, film_ratings, film_slugs):
+        for title, film_uid, film_rating, film_slug, film_img in zip(film_titles, film_uids, film_ratings, film_slugs, film_imgs):
             yield {
                 'title': title,
                 'uid': film_uid,
                 'rating': film_rating,
                 'slug': film_slug,
+                'img': film_img
             }
-            data.append({'title': title, 'uid': film_uid, 'rating': film_rating, 'slug': film_slug})
+            data.append({'title': title, 'uid': film_uid, 'rating': film_rating, 'slug': film_slug, 'img': film_img})
 
         # Store the data into the JSON file
         with open(filename, 'w') as file:
