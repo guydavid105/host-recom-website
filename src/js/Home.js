@@ -13,11 +13,13 @@ export function Home() {
             <center>
             <Top />
             <br/>
+
                 {/* <img src={movie} alt="movie" height="80" ></img>
                 <img src={book} alt="book" height="80" ></img>
                 <img src={music} alt="music" height="80" ></img> */}
             
             <Slideshow />
+            <HashLink to="/setup"><i>Login</i></HashLink>
 
             <HorizontalScroll />
 

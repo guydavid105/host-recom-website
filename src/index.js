@@ -8,6 +8,8 @@ import { AnimatePresence } from "framer-motion";
 import {Home} from "./js/Home";
 import {NotFound} from "./js/404";
 import { Example } from './js/ExampleSubpage';
+import { Setup } from './js/Setup';
+
 import { ScrollToTop } from './js/helper/ScrollToTop';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -22,6 +24,8 @@ function App() {
         <Routes key={location.pathname} location={location}>
           <Route path="/" element={<Home />}/>
           <Route path="/example" element={<Example />}/>
+          <Route path="/setup" element={<Setup />}/>
+
           <Route path='/*' element={<NotFound />}/>
         </Routes> 
       </AnimatePresence>
