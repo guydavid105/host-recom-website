@@ -21,29 +21,46 @@ class LetterboxdSpider(scrapy.Spider):
     
 
     def parse(self, response):
+        """
+        Parse the response from the website and extract film information.
+
+        Args:
+            response (scrapy.http.Response): The response object from the website.
+
+        Yields:
+            dict: A dictionary containing the film information for the user.
+            json: A json file containing the film information for the user.
+        """
         # Extract film information from the page:
         films = response.css('li.poster-container')
 
+        # Initialise lists to store the extracted data
         film_titles = []
         film_uids = []
         film_ratings = []
         film_imgs = []
         film_slugs = []
+
         for film in films:
+            # Get film title from the alt text of the poster image
             film_titles.append(film.css('div.film-poster img::attr(alt)').get())
 
+            # Get film UID from the data-film-id attribute of the poster
             film_uid = film.css('div.film-poster::attr(data-film-id)').get()
             film_uids.append(film_uid)
 
+            # Get film slug from the data-film-slug attribute of the poster
             film_slug = film.css('div.film-poster::attr(data-film-slug)').get()
             film_slugs.append(film_slug)
 
+            # Construct the url using the film_uid and film_slug (cursed URL construction, but it works)
             img_URL = 'https://a.ltrbxd.com/resized/film-poster/'
             for char in film_uid:
                 img_URL = img_URL + char + '/'
             img_URL = img_URL + film_uid + '-' + film_slug + '-0-500-0-750-crop.jpg'
             film_imgs.append(img_URL)
 
+            # Calculate the film rating from the number of stars in the poster viewingdata
             film_rating = film.css('p.poster-viewingdata span.rating::text').get()
             if film_rating:
                 rating = 0
@@ -61,9 +78,9 @@ class LetterboxdSpider(scrapy.Spider):
         # load in JSON to update
         filename = 'film_data.json'
         with open(filename, 'r') as file:
-            data = json.load(file) # Should get an empty list, or list of dicts
+            data = json.load(file)
         file.close()
-        # Process the extracted data
+        # Add extracted data to json
         for title, film_uid, film_rating, film_slug, film_img in zip(film_titles, film_uids, film_ratings, film_slugs, film_imgs):
             yield {
                 'title': title,
@@ -79,7 +96,7 @@ class LetterboxdSpider(scrapy.Spider):
             json.dump(data, file)
         file.close()
 
-        # Follow pagination links
+        # Follow pagination links, and repeat
         next_page = response.css('li.paginate-current + li a::attr(href)').get()
         if next_page is not None:
             yield response.follow(next_page, self.parse)
