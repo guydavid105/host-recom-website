@@ -14,13 +14,13 @@ class LetterboxdSpider(scrapy.Spider):
         # Create the URL
         url = [f'https://letterboxd.com/{username}/films/']
         # Init json
-        filename = 'film_data.json'
+        filename = f'{username}_film_data.json'
         with open(filename, 'w') as file:
             json.dump([], file)
-        yield scrapy.Request(url=url[0], callback=self.parse)
+        yield scrapy.Request(url=url[0], callback=self.parse, cb_kwargs={'username': username})
     
 
-    def parse(self, response):
+    def parse(self, response, username):
         """
         Parse the response from the website and extract film information.
 
@@ -76,7 +76,7 @@ class LetterboxdSpider(scrapy.Spider):
                 film_ratings.append('')
 
         # load in JSON to update
-        filename = 'film_data.json'
+        filename = f'{username}_film_data.json'
         with open(filename, 'r') as file:
             data = json.load(file)
         file.close()
@@ -99,4 +99,4 @@ class LetterboxdSpider(scrapy.Spider):
         # Follow pagination links, and repeat
         next_page = response.css('li.paginate-current + li a::attr(href)').get()
         if next_page is not None:
-            yield response.follow(next_page, self.parse)
+            yield response.follow(next_page, self.parse, cb_kwargs={'username': username})
