@@ -19,7 +19,6 @@ export function Home() {
                 <img src={music} alt="music" height="80" ></img> */}
             
             <Slideshow />
-            <HashLink to="/setup"><i>Login</i></HashLink>
 
             <HorizontalScroll />
 
