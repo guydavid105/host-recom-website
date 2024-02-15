@@ -7,7 +7,11 @@ class LetterboxdSpider(scrapy.Spider):
     name = 'letterboxd'
 
     def start_requests(self):
-        username = 'jay'
+        # Get the username from the arguments
+        username = getattr(self, 'username', None)
+        if username is None:
+            raise ValueError('No username provided. Please provide a username with the -a flag.')
+        # Create the URL
         url = [f'https://letterboxd.com/{username}/films/']
         # Init json
         filename = 'film_data.json'
