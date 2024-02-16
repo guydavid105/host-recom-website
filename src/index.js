@@ -26,7 +26,8 @@ function App() {
           <Route path="/example" element={<Example />}/>
           <Route path="/setup" element={<Setup />}/>
 
-          <Route path='/*' element={<NotFound />}/>
+          {/* <Route path='/*' element={<NotFound />}/> */}
+          <Route path='/*' element={<Home />}/>
         </Routes> 
       </AnimatePresence>
       {/* </ScrollToTop> */}
