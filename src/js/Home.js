@@ -88,13 +88,14 @@ export function Home() {
         <>
             <center>
             <Top />
-            <br/>
 
-                {/* <img src={movie} alt="movie" height="80" ></img>
+            {/* <img src={movie} alt="movie" height="80" ></img>
                 <img src={book} alt="book" height="80" ></img>
                 <img src={music} alt="music" height="80" ></img> */}
-            <>
-              <b>Your Top Tracks: </b> <br/>
+        <div className="two-column-container">
+          <div className="column">
+          
+            <b><i>Your</i> Top Tracks</b>  
              
             <div className='recommendation-box'>
             { data.length>0? (data.map((item, index) => (
@@ -102,7 +103,8 @@ export function Home() {
               {/* Check if "artists" array exists and has at least one item */}
               {item.artists && item.artists.length > 0 && 
               (<div className="song-info">
-               <img src={item.album.images[0].url} alt={item.name} className='album-image' height="15"></img>
+                {item.album.images.length>0 &&(
+               <img src={item.album.images[0].url} alt={item.name} className='album-image' height="15"></img>)}
               {/* <p className='song-name'>{item.name}</p> --- <p className='artist-name'><i>{item.artists[0].name}</i></p> */}
                 <b>{item.name}</b> --- <i>{item.artists[0].name}</i>
               </div>
@@ -113,17 +115,15 @@ export function Home() {
             }
             </div>
             <button onClick={handleGetPlaylists}>Import Spotify Data</button> <br></br>
+     
+        </div>
 
-           
-
-            {/* <img src={data["items"][0]["images"][0]["url"]}></img>  */}
-            {/* <img src={data["items"][0]["images"][1]["url"]}></img>  */}
-
-            {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
-            </>
-
+        <div className="column">
             <Slideshow />
+          </div>
+        </div>
 
+          
             <HorizontalScroll />
 
             <h2>Example audio</h2>
