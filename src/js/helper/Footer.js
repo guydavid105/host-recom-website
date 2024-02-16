@@ -25,7 +25,7 @@ export default function Footer(){
 
 function popup() {
     alert("Warm Welcome!\n\
-    \n---Version: 0.5.8---\n\
+    \n---Version 3.2---\n\
     Please press the below button to Exit. Thank you! ⬇️")    
 }
 

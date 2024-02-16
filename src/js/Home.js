@@ -49,9 +49,10 @@ export function Home() {
         localStorage.setItem("expiresIn", expires_in);
  
         console.log(localStorage.getItem("accessToken"));
-        console.log(token_type);
-        console.log(expires_in);
+    
         if(data.length===0){
+          console.log(token_type);
+          console.log(expires_in);
           alert("Login Spotify Success!");
         }
         if(localStorage.getItem("accessToken")){
@@ -61,7 +62,7 @@ export function Home() {
     });
 
     const handleGetPlaylists = () => {
-        console.log(token);
+        // console.log(token);
         axios
           .get(PLAYLISTS_ENDPOINT, {
             headers: {
@@ -114,7 +115,7 @@ export function Home() {
             <p className="no-data">No data available before login and import.</p>
             }
             </div>
-            <button onClick={handleGetPlaylists}>Import Spotify Data</button> <br></br>
+            <button onClick={handleGetPlaylists}>Import Spotify Data (Login)</button> <br></br>
      
         </div>
 
