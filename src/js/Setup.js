@@ -25,7 +25,7 @@ export function Setup(props)
     const SPOTIFY_AUTHORIZE_ENDPOINT="https://accounts.spotify.com/authorize";
     const REDIRECT_URL = "http://localhost:3000";
     const SPACE_DELIMITER = "%20";
-    const SCOPES = ["user-read-currently-playing","user-read-playback-state"];
+    const SCOPES = ["user-read-currently-playing","user-read-playback-state","user-top-read", "user-read-recently-played"];
     const SCOPES_URL = SCOPES.join(SPACE_DELIMITER);
     const handleSpotify = () => {
         window.location = `${SPOTIFY_AUTHORIZE_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URL}&scope=${SCOPES_URL}&response_type=token&show_dialog=true`;

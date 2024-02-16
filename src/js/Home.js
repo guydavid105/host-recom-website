@@ -9,10 +9,17 @@ import {Top} from "./helper/Top";
 import React, { useEffect, useState } from "react";
 import HorizontalScroll from "./helper/horizontalScroll";
 import axios from "axios";
-const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/playlists/";
+// const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/playlists/";
+// const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/top/artists/";
+const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/top/tracks?time_range=long_term";
+// const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/player/currently-playing/";
+
+
+
+
 
 export function Home() { 
-    const [token, setToken] = useState("");
+    const [token, setToken] = useState("no");
     const [data, setData] = useState({});
     /* 
     http://localhost:3000/webapp#access_token=ABCqxL4Y&token_type=Bearer&expires_in=3600
@@ -44,8 +51,9 @@ export function Home() {
         console.log(localStorage.getItem("accessToken"));
         console.log(token_type);
         console.log(expires_in);
-        alert("Login Spotify Success!");
-
+        if(data.length===0){
+          alert("Login Spotify Success!");
+        }
         if(localStorage.getItem("accessToken")){
             setToken(localStorage.getItem("accessToken"));
         }
@@ -61,9 +69,15 @@ export function Home() {
             },
           })
           .then((response) => {
-            setData(response.data);
             console.log(response.data)
+            // playlist
             // console.log(response.data["items"][0]["images"][0]["url"])
+            // top tracks
+            // console.log(response.data["items"].length)
+            // console.log(response.data["items"][0])
+            // console.log(response.data["items"][0]["artists"][0]["name"])
+            // console.log(response.data["items"][0]["name"])
+            setData(response.data["items"]); 
           })
           .catch((error) => {
             console.log(error);
@@ -80,7 +94,28 @@ export function Home() {
                 <img src={book} alt="book" height="80" ></img>
                 <img src={music} alt="music" height="80" ></img> */}
             <>
-            <button onClick={handleGetPlaylists}>Get Playlists</button> <br></br>
+              <b>Your Top Tracks: </b> <br/>
+             
+            <div className='recommendation-box'>
+            { data.length>0? (data.map((item, index) => (
+              <div key={index} className='recommendation-item'>
+              {/* Check if "artists" array exists and has at least one item */}
+              {item.artists && item.artists.length > 0 && 
+              (<div className="song-info">
+               <img src={item.album.images[0].url} alt={item.name} className='album-image' height="15"></img>
+              {/* <p className='song-name'>{item.name}</p> --- <p className='artist-name'><i>{item.artists[0].name}</i></p> */}
+                <b>{item.name}</b> --- <i>{item.artists[0].name}</i>
+              </div>
+               )}
+              </div>
+            ))) : 
+            <p className="no-data">No data available before login and import.</p>
+            }
+            </div>
+            <button onClick={handleGetPlaylists}>Import Spotify Data</button> <br></br>
+
+           
+
             {/* <img src={data["items"][0]["images"][0]["url"]}></img>  */}
             {/* <img src={data["items"][0]["images"][1]["url"]}></img>  */}
 
