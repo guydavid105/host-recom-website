@@ -120,22 +120,22 @@ export function Home() {
 
         <div className="column">
             <Slideshow />
+            <audio src={music_mp3} autoplay="autoplay" controls loop="loop" >Example audio</audio>
+
           </div>
         </div>
 
           
             <HorizontalScroll />
 
-            <h2>Example audio</h2>
-            <audio src={music_mp3} autoplay="autoplay" controls loop="loop"></audio>
-
-            <h2>Try example subpage</h2> 
-            <HashLink to="/example"><i>Example Subpage</i></HashLink>
+          
+            {/* <h2>Try example subpage</h2> 
+            <HashLink to="/example"><i>Example Subpage</i></HashLink> */}
            
-            <h2>Developer Notice Board</h2> 
+            {/* <h2>Developer Notice Board</h2> 
             Change me from src/index.js <br/>
             Other subpages implemented at src/js/ <br/>
-            Reference: <a href="https://reactjs.org">Learn React</a> <br/>
+            Reference: <a href="https://reactjs.org">Learn React</a> <br/> */}
             </center>
 
             <Footer />
