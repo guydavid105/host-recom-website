@@ -24,6 +24,7 @@ export function Setup(props)
     const CLIENT_ID = "296e5dd18ce041a48bc1f416312b3013";
     const SPOTIFY_AUTHORIZE_ENDPOINT="https://accounts.spotify.com/authorize";
     const REDIRECT_URL = "http://localhost:3000";
+    // const REDIRECT_URL = "https://peter2024h.github.io/";
     const SPACE_DELIMITER = "%20";
     const SCOPES = ["user-read-currently-playing","user-read-playback-state","user-top-read", "user-read-recently-played"];
     const SCOPES_URL = SCOPES.join(SPACE_DELIMITER);
