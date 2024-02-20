@@ -1,7 +1,5 @@
-from pathlib import Path
 import scrapy
 import json
-import os 
 
 class LetterboxdSpider(scrapy.Spider):
     name = 'letterboxd'
