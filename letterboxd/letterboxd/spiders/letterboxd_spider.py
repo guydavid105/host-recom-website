@@ -14,7 +14,7 @@ class LetterboxdSpider(scrapy.Spider):
         # Init json
         filename = f'{username}_film_data.json'
         with open(filename, 'w') as file:
-            json.dump([], file)
+            json.dump([{"username" : username}], file)
         yield scrapy.Request(url=url[0], callback=self.parse, cb_kwargs={'username': username})
     
 
