@@ -14,10 +14,6 @@ import axios from "axios";
 const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/top/tracks?time_range=long_term";
 // const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/player/currently-playing/";
 
-
-
-
-
 export function Home() { 
     const [token, setToken] = useState("no");
     const [data, setData] = useState({});
@@ -121,7 +117,7 @@ export function Home() {
 
         <div className="column">
             <Slideshow />
-            <audio src={music_mp3} autoplay="autoplay" controls loop="loop" >Example audio</audio>
+            <audio src={music_mp3} autoPlay="autoPlay" controls loop="loop" >Example audio</audio>
 
           </div>
         </div>

@@ -5,6 +5,7 @@ import Footer from "./helper/Footer";
 import email from '../asset/login/email.png';
 import password from '../asset/login/password.png';
 import person from '../asset/login/person.png';
+
 export function Setup(props)
 {
     const [action,setAction] = useState("Login");
@@ -21,7 +22,7 @@ export function Setup(props)
         window.location = `/`;
     }
 
-    const CLIENT_ID = "296e5dd18ce041a48bc1f416312b3013";
+    const CLIENT_ID = "1d2d560c83a3419e8a003dd39460ec75";
     const SPOTIFY_AUTHORIZE_ENDPOINT="https://accounts.spotify.com/authorize";
     const REDIRECT_URL = "http://localhost:3000";
     // const REDIRECT_URL = "https://peter2024h.github.io/";

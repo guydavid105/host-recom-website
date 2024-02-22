@@ -3,22 +3,20 @@ export default function Footer(){
     return(
     <>
     <br></br>
-    <hr width="50%" color="#987cb9" SIZE="1" />
+    <hr width="50%" color="#987cb9" size="1" />
         
-        <table class="table_footer">
+        <table className="table_footer">
             <tbody>
+            <tr>
                 <td>
-
                     <i>Movies x Books x Music</i> Recommendation System!  &nbsp;
-                    <button class="button button_blogs" onClick={() => {popup()}}> Details </button>
+                    <button className="button button_blogs" onClick={() => {popup()}}> Details </button>
                     &nbsp; <br/>
-                    <FooterCommon />
-                    
+                    <FooterCommon />  
                 </td>
+            </tr>
             </tbody>
         </table>
-
-
     </>
 )
 }
