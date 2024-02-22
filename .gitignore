@@ -33,3 +33,6 @@ log.txt
 
 # Ignore JSON files
 *.json
+
+# Ignore zip archives
+*.zip
