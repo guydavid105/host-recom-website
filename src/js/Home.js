@@ -11,7 +11,7 @@ import HorizontalScroll from "./helper/horizontalScroll";
 import axios from "axios";
 // const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/playlists/";
 // const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/top/artists/";
-const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/top/tracks?time_range=long_term";
+const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/top/tracks?time_range=medium_term";
 // const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/player/currently-playing/";
 
 export function Home() { 
