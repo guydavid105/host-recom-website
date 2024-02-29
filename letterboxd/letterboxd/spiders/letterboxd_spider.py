@@ -56,7 +56,7 @@ class LetterboxdSpider(scrapy.Spider):
             img_URL = 'https://a.ltrbxd.com/resized/film-poster/'
             for char in film_uid:
                 img_URL = img_URL + char + '/'
-            img_URL = img_URL + film_uid + '-' + film_slug + '-0-500-0-750-crop.jpg'
+            img_URL = img_URL + film_uid + '-' + film_slug + '-0-230-0-345-crop.jpg' # NOTE: this hard codes resolution at most common (230x345)
             film_imgs.append(img_URL)
 
             # Calculate the film rating from the number of stars in the poster viewingdata
