@@ -1,5 +1,6 @@
 import scrapy
 import json
+import time
 
 class LetterboxdSpider(scrapy.Spider):
     name = 'letterboxd'
@@ -122,9 +123,14 @@ class LetterboxdSpider(scrapy.Spider):
                         raise e
 
             # I know this code is horrific, but can't think of a better bodge for now... sry guys.
-            # One race condition, and we're loopin'
+            # One race condition, and we're loopin'. Add timeout to fix this.
+            timeout = time.time() + 240 # 4 mins lol
             while len(slug_years) < count:
-                yield
+                if time.time() > timeout:
+                    print("Timeout error: Not all films have been parsed.")
+                    break
+                else:
+                    yield
                 
             for film in data:
                 try:
