@@ -91,6 +91,7 @@ code {
 
 /* Login in */
 .container{
+  border-radius: 25px;
   display: flex;
   flex-direction:  column;
   margin: auto;
