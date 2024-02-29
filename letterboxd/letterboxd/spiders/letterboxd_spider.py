@@ -51,7 +51,7 @@ class LetterboxdSpider(scrapy.Spider):
             film_slug = film.css('div.film-poster::attr(data-film-slug)').get()
             film_slugs.append(film_slug)
 
-            # Construct the url using the film_uid and film_slug (cursed URL construction, but it works)
+            # Construct the url using the film_uid and film_slug (cursed URL construction, but it works (only sometimes...))
             img_URL = 'https://a.ltrbxd.com/resized/film-poster/'
             for char in film_uid:
                 img_URL = img_URL + char + '/'
@@ -98,3 +98,61 @@ class LetterboxdSpider(scrapy.Spider):
         next_page = response.css('li.paginate-current + li a::attr(href)').get()
         if next_page is not None:
             yield response.follow(next_page, self.parse, cb_kwargs={'username': username})
+        else:
+            # load in JSON to update
+            filename = f'{username}_film_data.json'
+            with open(filename, 'r') as file:
+                data = json.load(file)
+            file.close()
+
+            slug_years = {}
+            slugs = []
+            count = 0
+            for film in data:
+                try:
+                    slug = film['slug']
+                    slugs.append(slug)
+                    yield scrapy.Request(url=f'https://letterboxd.com/film/{slug}', callback=self.parse_film, cb_kwargs={'slug': slug, 'years': slug_years})
+                    count += 1
+                except(KeyError):
+                    # Is the username. 
+                    try:
+                        username = film['username']
+                    except Exception as e:
+                        raise e
+
+            # I know this code is horrific, but can't think of a better bodge for now... sry guys.
+            # One race condition, and we're loopin'
+            while len(slug_years) < count:
+                yield
+                
+            for film in data:
+                try:
+                    slug = film['slug']
+                    film['year'] = slug_years[slug]
+                except(KeyError):
+                    pass
+                    
+            # Store the data into the JSON file
+            with open(filename, 'w') as file:
+                json.dump(data, file)
+            file.close()
+            
+
+    def parse_film(self, response, slug, years):
+        """
+        Parse the response from the website and extract film information.
+        
+        Args:
+            response (scrapy.http.Response): The response object from the website.
+            slug (str): The slug of the film.
+            years (dict): The dictionary to store the film years.
+        
+        Yields:
+            dict: A dictionary containing the film information for the user.
+            json: A json file containing the film information for the user.
+        """
+
+        film_year = response.css('small.number a::text').get()
+
+        years.update({slug: film_year})
