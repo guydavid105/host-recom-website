@@ -10,9 +10,10 @@ class LetterboxdSpider(scrapy.Spider):
         username = getattr(self, 'username', None)
         if username is None:
             raise ValueError('No username provided. Please provide a username with the -a flag.')
-        # Create the URL
+        
         url = [f'https://letterboxd.com/{username}/films/']
-        # Init json
+        
+        # Init json with username
         filename = f'{username}_film_data.json'
         with open(filename, 'w') as file:
             json.dump([{"username" : username}], file)
@@ -79,6 +80,7 @@ class LetterboxdSpider(scrapy.Spider):
         with open(filename, 'r') as file:
             data = json.load(file)
         file.close()
+
         # Add extracted data to json
         for title, film_uid, film_rating, film_slug, film_img in zip(film_titles, film_uids, film_ratings, film_slugs, film_imgs):
             yield {
