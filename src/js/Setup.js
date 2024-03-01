@@ -8,6 +8,8 @@ import person from '../asset/login/person.png';
 import letterboxd from '../asset/login/letterboxd.png';
 import spotifyIcon from '../asset/login/Spotify.png';
 import bookIcon from '../asset/login/books.png';
+import Goodreads from '../asset/login/goodreads.png';
+
 export function Setup(props)
 {
     const [action,setAction] = useState("Login");
@@ -59,16 +61,16 @@ export function Setup(props)
                 <div className="forgot-password">Hello {val}! </div>
                 <div className="inputs">
                     <div className="input">
-                        <img src={person} alt="person"></img>
-                        <input type="text" placeholder="Name" onChange={handleChange}></input>
-                    </div>
-                    <div className="input">
                         <img src={letterboxd} alt="letterboxd" height="8" width="21"></img>
                         <input type="Letterboxd" placeholder="Letterboxd"></input>
                     </div>
                     <div className="input">
-                        <img src={bookIcon} alt="books" height="20" width="21" ></img>
-                        <input type="Books" placeholder="Books"></input>
+                        <img src={Goodreads} alt="Goodreads" height="20" width="21" ></img>
+                        <input type="Books" placeholder="Goodreads"></input>
+                    </div>
+                    <div className="input">
+                        <img src={person} alt="person"></img>
+                        <input type="text" placeholder="Name" onChange={handleChange}></input>
                     </div>
                     <div className="input">
                         <img src={email} alt="email"></img>
