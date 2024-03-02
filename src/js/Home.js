@@ -137,7 +137,7 @@ export function Home() {
             {/* Default suggestion:  */}
             Town of Windmill 🎵
             <br></br>
-            <audio src={music_mp3} autoPlay="autoPlay" controls loop="loop" >Example audio</audio>
+            <audio src={music_mp3} controls loop="loop">Example audio</audio>
             <br></br>
             See more after <b>Spotify Login</b> and <b>Import</b>. 
             
