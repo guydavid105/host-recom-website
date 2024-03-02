@@ -96,9 +96,13 @@ export function Setup(props)
             {/* <AuthProvider authType = {'cookie'}
                           authName = {'_auth'}
             ></AuthProvider> */}
+            <h1>Registration Form</h1>
+            <h2>Used for Dev Version</h2>
 
-           
+            <br/>
+             <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdtmTTq5Zlz6Pu0xzwhp7IFSNdPHWygFbKz1z1LfDbeXIcavQ/viewform?embedded=true" width="640" height="757" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
         </center>
+       
         <Footer />
         </>
     )
