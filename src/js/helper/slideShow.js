@@ -7,10 +7,11 @@ import book1 from '../../asset/books/and_then_there_were_none.jpg';
 import book2 from '../../asset/books/TheLittlePrince.jpg';
 import book3 from '../../asset/books/TheTaleofPeterRabbit.jpg';
 import book4 from '../../asset/books/Life_After_Life.jpg';
+import book5 from '../../asset/books/still-life.png';
+import book6 from '../../asset/books/IntroToAlgo.jpg';
 
 
-const pics = [book1, book2, book3, book4];
-// const title = ["Movie", "Book", "Music"];
+const pics = [book1, book2, book3, book4, book5, book6];
 
 const cards = [
   {
@@ -32,6 +33,16 @@ const cards = [
     img: "asset/book.jpg",
     title: "Life after Life",
     id: 4,
+  },
+  {
+    img: "asset/book.jpg",
+    title: "Still Life",
+    id: 5,
+  },
+  {
+    img: "asset/book.jpg",
+    title: "Introduction to Algorithms",
+    id: 6,
   }
 ];
 
