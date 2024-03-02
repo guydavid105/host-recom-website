@@ -131,11 +131,21 @@ export function Home() {
                )}
               </div>
             ))) : 
-            <p className="no-data">No music data available before <b>Spotify Login</b> and <b>Import</b>.</p>
+            
+       
+            <p className="no-data">
+            {/* Default suggestion:  */}
+            Town of Windmill 🎵
+            <br></br>
+            <audio src={music_mp3} autoPlay="autoPlay" controls loop="loop" >Example audio</audio>
+            <br></br>
+            See more after <b>Spotify Login</b> and <b>Import</b>. 
+            
+            </p>
             }
             </div>
             
-            <audio src={music_mp3} autoPlay="autoPlay" controls loop="loop" >Example audio</audio>Try this for default suggestion! 🎵
+          
            
             <br></br>
         </div>
