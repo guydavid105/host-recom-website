@@ -2,13 +2,18 @@
 
 Group project to make a recommender system that works for books, movies and music.
 
+Movies 📽 x Books 📖 x Music 🎵
+
 ## React Website
+
 For the first time set up,
+
 ```
 npm install
 ```
 
 To run it locally,
+
 ```
 npm run start
 ```

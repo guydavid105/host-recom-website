@@ -24,11 +24,11 @@ export function Home() {
     const getReturnedParamsFromSpotifyAuth = (hash) => {
         const stringAfterHashtag = hash.substring(1);
         const paramsInUrl = stringAfterHashtag.split("&");
-        const paramsSplitUp = paramsInUrl.reduce((accumulater, currentValue) => {
+        const paramsSplitUp = paramsInUrl.reduce((accumulator, currentValue) => {
         console.log(currentValue);
         const [key, value] = currentValue.split("=");
-        accumulater[key] = value;
-        return accumulater;
+        accumulator[key] = value;
+        return accumulator;
         }, {});
     
         return paramsSplitUp;
@@ -89,10 +89,33 @@ export function Home() {
             {/* <img src={movie} alt="movie" height="80" ></img>
                 <img src={book} alt="book" height="80" ></img>
                 <img src={music} alt="music" height="80" ></img> */}
+            
+          <button 
+          style={{ borderWidth:1,
+            alignItems:'center',
+            justifyContent:'center',
+            width:50,
+            height:25,
+            backgroundColor:'#dac1f5',
+            borderRadius:10,
+          }}
+          onClick={handleGetPlaylists}> <HashLink to={{pathname:"/setup"}}> Login</HashLink></button> 
+
         <div className="two-column-container">
           <div className="column">
-          
-            <b><i>Your</i> Top Tracks</b>  
+
+          <button 
+            style={{ borderWidth:1,
+              alignItems:'center',
+              justifyContent:'center',
+              width:250,
+              height:40,
+              backgroundColor:'#dac1f5',
+              borderRadius:100,
+            }}
+          onClick={handleGetPlaylists}> Login ☝️ <u>Import 👈</u> Spotify Data</button> 
+            {/* <b><i>Your</i> Top Tracks</b>   */}
+            <b><i>MUSIC 🎵</i> </b>  
              
             <div className='recommendation-box'>
             { data.length>0? (data.map((item, index) => (
@@ -108,16 +131,20 @@ export function Home() {
                )}
               </div>
             ))) : 
-            <p className="no-data">No data available before login and import.</p>
+            <p className="no-data">No music data available before <b>Spotify Login</b> and <b>Import</b>.</p>
             }
             </div>
-            <button onClick={handleGetPlaylists}>Import Spotify Data (Login)</button> <br></br>
-     
+            
+            <audio src={music_mp3} autoPlay="autoPlay" controls loop="loop" >Example audio</audio>Try this for default suggestion! 🎵
+           
+            <br></br>
         </div>
 
         <div className="column">
+          <b><i>BOOKS 📖</i> </b>  
+
             <Slideshow />
-            <audio src={music_mp3} autoPlay="autoPlay" controls loop="loop" >Example audio</audio>
+
 
           </div>
         </div>
