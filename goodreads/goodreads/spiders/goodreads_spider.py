@@ -36,7 +36,7 @@ class GoodreadsSpider(scrapy.Spider):
             titles.append(book.css('td.field.title a::attr(title)').get())
             link = book.css('td.field.title a::attr(href)').get()
             uids.append(link.replace('/book/show/', ''))
-            ratings.append(book.css('td.field.rating span.staticStars::attr(title)').get())
+            rating = (book.css('td.field.rating span.staticStars::attr(title)').get())
             
             match rating:
                 case 'did not like it':
@@ -57,6 +57,8 @@ class GoodreadsSpider(scrapy.Spider):
                 case _:
                     rating = None
 
+            ratings.append(rating)
+
             imgs.append(book.css('td.field.cover img::attr(src)').get())
             # TODO: Can get a higher res one by going to the book page, but this will be left as an extension.
 
@@ -66,7 +68,7 @@ class GoodreadsSpider(scrapy.Spider):
                 releases.append(None)
 
         # load in JSON to update
-        filename = f'{username}_film_data.json'
+        filename = f'{username}_book_data.json'
         with open(filename, 'r') as file:
             data = json.load(file)
         file.close()
