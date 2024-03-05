@@ -89,3 +89,7 @@ class GoodreadsSpider(scrapy.Spider):
             json.dump(data, file)
         file.close()
 
+        # Follow pagination links, and repeat
+        next_page = response.css('a.next_page::attr(href)').get()
+        if next_page is not None:
+            yield response.follow(next_page, self.parse, cb_kwargs={'username': username})
