@@ -45,6 +45,8 @@ class GoodreadsSpider(scrapy.Spider):
                 case _:
                     rating = None
 
+            img = book.css('td.field.cover img::attr(src)').get()
+            # TODO: Can get a higher res one by going to the book page, but this will be left as an extension.
 
             yield {
                 'title': title,
