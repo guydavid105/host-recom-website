@@ -24,7 +24,28 @@ class GoodreadsSpider(scrapy.Spider):
             title = book.css('td.field.title a::attr(title)').get()
             link = book.css('td.field.title a::attr(href)').get()
             uid = link.replace('/book/show/', '')
+            rating = book.css('td.field.rating span.staticStars::attr(title)').get()
             
+            match rating:
+                case 'did not like it':
+                    rating = 1
+
+                case 'it was ok':
+                    rating = 2
+
+                case 'liked it':
+                    rating = 3
+
+                case 'really liked it':
+                    rating = 4
+
+                case 'it was amazing':
+                    rating = 5
+
+                case _:
+                    rating = None
+
+
             yield {
                 'title': title,
                 'uid': uid,
