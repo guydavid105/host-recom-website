@@ -27,8 +27,12 @@ See more at [React.md](./doc/React.md)
 ![Website Gallery View](./doc/photo/Website-v1.png)
 
 Dependencies:
+```
 npm i react-vertical-timeline-component
+```
+```
 npm i moment
+```
 
 ## Scraping:
 
