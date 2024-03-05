@@ -14,6 +14,7 @@ import axios from "axios";
 const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/top/tracks?time_range=medium_term";
 // const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/player/currently-playing/";
 
+
 export function Home() { 
     const [token, setToken] = useState("no");
     const [data, setData] = useState({});
@@ -94,12 +95,21 @@ export function Home() {
           style={{ borderWidth:1,
             alignItems:'center',
             justifyContent:'center',
-            width:50,
-            height:25,
             backgroundColor:'#dac1f5',
             borderRadius:10,
+            padding: 10,
           }}
-          onClick={handleGetPlaylists}> <HashLink to={{pathname:"/setup"}}> Login</HashLink></button> 
+          onClick={handleGetPlaylists}> <HashLink to={{pathname:"/setup"}}> Login</HashLink></button>
+
+          <button
+          style= {{ borderWidth:1,
+            alignItems:'center',
+            justifyContent:'center',
+            backgroundColor:'#dac1f5',
+            borderRadius:10,
+            padding:10,
+          }}
+          > <HashLink to={{pathname:"./timeline"}}>Recommendation Timeline</HashLink></button>
 
         <div className="two-column-container">
           <div className="column">
