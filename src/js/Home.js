@@ -111,7 +111,7 @@ export function Home() {
           }}
           > <HashLink to={{pathname:"./timeline"}}>Recommendation Timeline</HashLink></button>
 
-        <div className="two-column-container">
+        <div className="column">
           <div className="column">
 
           <button 
