@@ -22,9 +22,11 @@ class GoodreadsSpider(scrapy.Spider):
         
         for book in books:
             title = book.css('td.field.title a::attr(title)').get()
-            # rating =
+            link = book.css('td.field.title a::attr(href)').get()
+            uid = link.replace('/book/show/', '')
             
             yield {
                 'title': title,
+                'uid': uid,
                 # 'rating': rating
             }   
