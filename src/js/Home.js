@@ -34,7 +34,28 @@ export function Home() {
     
         return paramsSplitUp;
     };
+
     
+    useEffect(() => {
+      if (data.length) {
+
+        let songs = []
+        // let songs = [{username: }]
+
+        for (let i = 0; i < data.length; i++) {
+          let rating = 5 - (i / data.length * 2.5)
+
+          songs.push({
+            title: data[i].name,
+            uid: data[i].id,
+            rating: rating
+          })
+        }
+
+        let dataString = JSON.stringify(songs);
+        console.log(dataString)
+      }
+    }, [data])
 
     useEffect(() => {
       if (window.location.hash) {
