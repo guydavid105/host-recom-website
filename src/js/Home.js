@@ -9,15 +9,15 @@ import {Top} from "./helper/Top";
 import React, { useEffect, useState } from "react";
 import HorizontalScroll from "./helper/horizontalScroll";
 import axios from "axios";
-// const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/playlists/";
-// const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/top/artists/";
+
 const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/top/tracks?time_range=medium_term";
-// const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/player/currently-playing/";
+const USER_ENDPOINT = "https://api.spotify.com/v1/me/";
 
 
 export function Home() { 
     const [token, setToken] = useState("no");
     const [data, setData] = useState({});
+    const [username, setUsername] = useState();
     /* 
     http://localhost:3000/webapp#access_token=ABCqxL4Y&token_type=Bearer&expires_in=3600
     */
@@ -39,7 +39,7 @@ export function Home() {
     useEffect(() => {
       if (data.length) {
 
-        let songs = []
+        let songs = [{username: username}]
         // let songs = [{username: }]
 
         for (let i = 0; i < data.length; i++) {
@@ -80,6 +80,28 @@ export function Home() {
     });
 
     const handleGetPlaylists = () => {
+      axios
+        .get(USER_ENDPOINT, { // Add a new endpoint
+          headers: {
+            Authorization:`Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data)
+          // playlist
+          // console.log(response.data["items"][0]["images"][0]["url"])
+          // top tracks
+          // console.log(response.data["items"].length)
+          // console.log(response.data["items"][0])
+          // console.log(response.data["items"][0]["artists"][0]["name"])
+          // console.log(response.data["items"][0]["name"])
+          setUsername(response.data["id"]); 
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+
         // console.log(token);
         axios
           .get(PLAYLISTS_ENDPOINT, {
