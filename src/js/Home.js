@@ -2,7 +2,7 @@ import book from '../asset/book.jpg';
 import music from '../asset/music.jpg';
 import movie from '../asset/movie.jpg';
 import music_mp3 from '../asset/audio/Town_of_Windmill.mp3';
-import {Slideshow} from './helper/slideShow';
+import {Slideshow, SlideshowMovies} from './helper/slideShow';
 import { HashLink } from 'react-router-hash-link';
 import Footer from "./helper/Footer";
 import {Top} from "./helper/Top";
@@ -13,6 +13,7 @@ import axios from "axios";
 // const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/top/artists/";
 const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/top/tracks?time_range=medium_term";
 // const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/player/currently-playing/";
+
 
 export function Home() { 
     const [token, setToken] = useState("no");
@@ -94,12 +95,21 @@ export function Home() {
           style={{ borderWidth:1,
             alignItems:'center',
             justifyContent:'center',
-            width:50,
-            height:25,
             backgroundColor:'#dac1f5',
             borderRadius:10,
+            padding: 10,
           }}
-          onClick={handleGetPlaylists}> <HashLink to={{pathname:"/setup"}}> Login</HashLink></button> 
+          onClick={handleGetPlaylists}> <HashLink to={{pathname:"/setup"}}> Login</HashLink></button>
+
+          <button
+          style= {{ borderWidth:1,
+            alignItems:'center',
+            justifyContent:'center',
+            backgroundColor:'#dac1f5',
+            borderRadius:10,
+            padding:10,
+          }}
+          > <HashLink to={{pathname:"./timeline"}}>Recommendation Timeline</HashLink></button>
 
         <div className="two-column-container">
           <div className="column">
@@ -134,11 +144,6 @@ export function Home() {
             
        
             <p className="no-data">
-            {/* Default suggestion:  */}
-            Town of Windmill 🎵
-            <br></br>
-            <audio src={music_mp3} controls loop="loop">Example audio</audio>
-            <br></br>
             See more after <b>Spotify Login</b> and <b>Import</b>. 
             
             </p>
@@ -160,7 +165,9 @@ export function Home() {
         </div>
 
           
-            <HorizontalScroll />
+            <SlideshowMovies />
+            
+            {/* <HorizontalScroll /> */}
 
           
             {/* <h2>Try example subpage</h2> 
