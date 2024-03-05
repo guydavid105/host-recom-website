@@ -48,10 +48,16 @@ class GoodreadsSpider(scrapy.Spider):
             img = book.css('td.field.cover img::attr(src)').get()
             # TODO: Can get a higher res one by going to the book page, but this will be left as an extension.
 
+            try:
+                release = book.css('td.field.date_pub div.value::text').get().split()[2]
+            except:
+                release = None
+
             yield {
                 'title': title,
                 'uid': uid,
                 'rating': rating,
                 'img': img,
+                'release': release,
                 # 'rating': rating
             }   
