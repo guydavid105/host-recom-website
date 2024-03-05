@@ -1,4 +1,5 @@
 import scrapy
+import json
 
 class GoodreadsSpider(scrapy.Spider):
     name = 'goodreads'
@@ -10,21 +11,32 @@ class GoodreadsSpider(scrapy.Spider):
         urls = [
             f"https://www.goodreads.com/review/list/{username}?shelf=read",
         ]
+        
+        # Init json with username
+        filename = f'{username}_book_data.json'
+        with open(filename, 'w') as file:
+            json.dump([{"username" : username}], file)
+        
         for url in urls:
-            yield scrapy.Request(url=url, callback=self.parse)
+            yield scrapy.Request(url=url, callback=self.parse, cb_kwargs={'username': username})
 
     
-    def parse(self, response):
+    def parse(self, response, username):
         # response = response.text
         # books = response.css('table').getall()[1]
 
         books = response.css('tbody tr')
         
+        titles = []
+        uids = []
+        ratings = []
+        imgs = []
+        releases = []
         for book in books:
-            title = book.css('td.field.title a::attr(title)').get()
+            titles.append(book.css('td.field.title a::attr(title)').get())
             link = book.css('td.field.title a::attr(href)').get()
-            uid = link.replace('/book/show/', '')
-            rating = book.css('td.field.rating span.staticStars::attr(title)').get()
+            uids.append(link.replace('/book/show/', ''))
+            ratings.append(book.css('td.field.rating span.staticStars::attr(title)').get())
             
             match rating:
                 case 'did not like it':
@@ -45,19 +57,33 @@ class GoodreadsSpider(scrapy.Spider):
                 case _:
                     rating = None
 
-            img = book.css('td.field.cover img::attr(src)').get()
+            imgs.append(book.css('td.field.cover img::attr(src)').get())
             # TODO: Can get a higher res one by going to the book page, but this will be left as an extension.
 
             try:
-                release = book.css('td.field.date_pub div.value::text').get().split()[2]
+                releases.append(book.css('td.field.date_pub div.value::text').get().split()[2])
             except:
-                release = None
+                releases.append(None)
 
+        # load in JSON to update
+        filename = f'{username}_film_data.json'
+        with open(filename, 'r') as file:
+            data = json.load(file)
+        file.close()
+
+        # Add extracted data to json
+        for title, uid, rating, img, year in zip(titles, uids, ratings, imgs, releases):
             yield {
                 'title': title,
                 'uid': uid,
                 'rating': rating,
                 'img': img,
-                'release': release,
-                # 'rating': rating
-            }   
+                'year': year,
+            }
+            data.append({'title': title, 'uid': uid, 'rating': rating, 'img': img, 'year': year})
+
+        # Store the data back into the JSON file
+        with open(filename, 'w') as file:
+            json.dump(data, file)
+        file.close()
+
