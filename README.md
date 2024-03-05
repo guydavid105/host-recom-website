@@ -4,7 +4,6 @@ Group project to make a recommender system that works for books, movies and musi
 <<<<<<< HEAD
 =======
 
-Peter_7Feb_React
 Movies 📽 x Books 📖 x Music 🎵
 
 ## React Website
@@ -26,6 +25,10 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 See more at [React.md](./doc/React.md)
 
 ![Website Gallery View](./doc/photo/Website-v1.png)
+
+Dependencies:
+npm i react-vertical-timeline-component
+npm i moment
 
 ## Scraping:
 
