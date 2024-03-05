@@ -51,5 +51,7 @@ class GoodreadsSpider(scrapy.Spider):
             yield {
                 'title': title,
                 'uid': uid,
+                'rating': rating,
+                'img': img,
                 # 'rating': rating
             }   
