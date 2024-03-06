@@ -43,7 +43,7 @@ export function Setup(props)
             },
           })
           .then((response) => {
-            console.log(response.data)
+            // console.log(response.data)
             // playlist
             // console.log(response.data["items"][0]["images"][0]["url"])
             // top tracks
@@ -167,6 +167,7 @@ export function Setup(props)
           })
         }
 
+        // Sends data to Guy's API, which passes into a python script
         axios.post('https://incubo.serveo.net/api/v1/people/post-spotify', songs).then((response) => {
           console.log(response.data)
         })
