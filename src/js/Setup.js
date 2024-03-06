@@ -155,6 +155,7 @@ export function Setup(props)
           songs.push({
             title: data[i].name,
             uid: data[i].id,
+            img: data[i]["album"]["images"][0]["url"],
             rating: String(rating)
           })
         }
