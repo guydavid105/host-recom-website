@@ -101,16 +101,27 @@ export function Home() {
             <center>
             <Top />
             
-          <button 
-          class= "buttonStyle"
-          onClick={handleGetPlaylists}> <HashLink to={{pathname:"/setup"}}> Login</HashLink></button>
+          <button class= "buttonStyle" onClick={handleGetPlaylists}> 
+            <HashLink to={{pathname:"/setup"}} > 
+              Login
+            </HashLink>
+          </button>
 
-          <button
-          class= "buttonStyle"
-          > <HashLink to={{pathname:"./timeline"}}>Recommendation Timeline</HashLink></button>
-          <button
-          class= "buttonStyle"
-          ><HashLink to={{pathname:"./InputItems"}}>Input Items</HashLink></button>
+          &nbsp;
+
+          <button class= "buttonStyle">
+            <HashLink to={{pathname:"./timeline"}}>
+              Timeline
+            </HashLink>
+          </button>
+
+          &nbsp;
+
+          <button class= "buttonStyle">
+            <HashLink to={{pathname:"./InputItems"}}>
+              Input Items
+            </HashLink>
+          </button>
         <div className="column">
           <div className="column">
 

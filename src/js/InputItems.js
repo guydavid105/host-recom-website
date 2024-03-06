@@ -21,7 +21,7 @@ export function InputItems(){
             <h2>Please enter any song, movie or book (up to 5)</h2>
             <div className="inputs">
                 <div className="input">
-                    <input type="    Item 1" placeholder="Item 1" id="item-1-id"></input>
+                    <input type="Item 1" placeholder="Item 1" id="item-1-id"></input>
                 </div>
                 <div className="input">
                     <input type="Item 2" placeholder="Item 2" id="item-2-id"></input>
