@@ -17,8 +17,17 @@ import "react-vertical-timeline-component/style.min.css"
 
 function dateComparer (event1, event2) {
     let eventOneDate, eventTwoDate
-    eventOneDate = event1.date
-    eventTwoDate = event2.date
+    if (event1.date == "None") {
+        eventOneDate = 0
+    } else {
+        eventOneDate = event1.date
+    }
+
+    if (event2.date == "None") {
+        eventTwoDate = 0
+    } else {
+        eventTwoDate = event2.date
+    }
     return moment(eventOneDate).isAfter(eventTwoDate) ? -1 : 1
 }
 
