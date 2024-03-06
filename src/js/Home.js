@@ -36,27 +36,31 @@ export function Home() {
     };
 
     
-    useEffect(() => {
-      if (data.length) {
+    // useEffect(() => {
+    //   if (data.length) {
 
-        let songs = [{username: username}]
-        // let songs = [{username: }]
+    //     let songs = [{username: username}]
+    //     // let songs = [{username: }]
 
-        for (let i = 0; i < data.length; i++) {
-          let rating = 5 - ((i / data.length) * 2.5);
+    //     for (let i = 0; i < data.length; i++) {
+    //       let rating = 5 - ((i / data.length) * 2.5);
 
-          songs.push({
-            title: data[i].name,
-            id: data[i].id,
-            rating: rating
-          })
-        }
+    //       songs.push({
+    //         title: data[i].name,
+    //         uid: data[i].id,
+    //         rating: String(rating)
+    //       })
+    //     }
 
-        let dataString = JSON.stringify(songs);
-        console.log(dataString)
-        // Put dataString into API to call in python script.
-      }
-    }, [data])
+    //     axios.post('https://incubo.serveo.net/api/v1/people/post-spotify', songs).then((response) => {
+    //       console.log(response.data)
+    //     })
+
+    //     // let dataString = JSON.stringify(songs);
+    //     // console.log(dataString)
+    //     // Put dataString into API to call in python script.
+    //   }
+    // }, [data])
 
     useEffect(() => {
       if (window.location.hash) {
