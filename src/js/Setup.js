@@ -20,6 +20,16 @@ export function Setup(props)
     };
 
     const clickHandler = ()=>{
+        if (localStorage.getItem('book')) {
+            localStorage.removeItem('book');
+        }
+        if (localStorage.getItem('movie')) {
+            localStorage.removeItem('movie');
+        }
+        if (localStorage.getItem('song')) {
+            localStorage.removeItem('song');
+        }
+
         const letterboxd = document.getElementById('letterboxd-id').value;
         const goodreads = document.getElementById('goodreads-id').value;
         console.log(letterboxd, goodreads);
@@ -37,6 +47,11 @@ export function Setup(props)
             const user_data = async () => {
                 const response = await fetch(url);
                 const data = await response.json();
+                console.log(data);
+                if (data.length === 0) {
+                    alert("User not found!");
+                    window.location = `/`;
+                }
                 return data;
             };
             async function recommendations(){
@@ -58,10 +73,22 @@ export function Setup(props)
                 const song_data = await song_response.json();
                 console.log(song_data);
 
-                return [book_data, movie_data, song_data];
+                if (book_data.length != 0) {
+                    localStorage.setItem('book', JSON.stringify(book_data));
+                }
+
+                if (movie_data.length != 0) {
+                    localStorage.setItem('movie', JSON.stringify(movie_data));
+                }
+
+                if (song_data.length != 0) {
+                    localStorage.setItem('song', JSON.stringify(song_data));
+                }
+
+                alert("Login Success!");
+                window.location = `/`;
             };
             recommendations();
-            //window.location = `/`;
         }
     }
 

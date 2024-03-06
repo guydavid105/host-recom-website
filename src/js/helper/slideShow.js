@@ -11,42 +11,16 @@ import book5 from '../../asset/books/still-life.png';
 import book6 from '../../asset/books/IntroToAlgo.jpg';
 
 
-const pics = [book1, book2, book3, book4, book5, book6];
-
-const cards = [
-  {
-    img: "asset/book.jpg",
-    title: "And Then There Were None",
-    id: 1,
-  },
-  {
-    img: "asset/movie.jpg",
-    title: "The Little Prince",
-    id: 2,
-  },
-  {
-    img: "asset/music.jpg",
-    title: "The Tale of Peter Rabbit",
-    id: 3,
-  },
-  {
-    img: "asset/book.jpg",
-    title: "Life after Life",
-    id: 4,
-  },
-  {
-    img: "asset/book.jpg",
-    title: "Still Life",
-    id: 5,
-  },
-  {
-    img: "asset/book.jpg",
-    title: "Introduction to Algorithms",
-    id: 6,
-  }
+let cards = [
+  {img: book1, title: "And Then There Were None", id: 1},
+  {img: book2, title: "The Little Prince", id: 2},
+  {img: book3, title: "The Tale of Peter Rabbit", id: 3},
+  {img: book4, title: "Life after Life", id: 4},
+  {img: book5, title: "Still Life", id: 5},
+  {img: book6, title: "Introduction to Algorithms", id: 6}
 ];
 
-const moviecards = [
+let moviecards = [
   { id: 706083, type: "movie", title: "Wonka", img: "https://a.ltrbxd.com/resized/film-poster/7/0/6/0/8/3/706083-wonka-0-500-0-750-crop.jpg" },
   { id: 764890, type: "movie", title: "The Iron Claw", img: "https://a.ltrbxd.com/resized/film-poster/7/6/4/8/9/0/764890-the-iron-claw-2023-0-500-0-750-crop.jpg" }, 
   { id: 724394, type: "movie", title: "The Exorcist: Believer", img: "https://a.ltrbxd.com/resized/film-poster/7/2/4/3/9/4/724394-the-exorcist-believer-0-500-0-750-crop.jpg" }, 
@@ -68,6 +42,13 @@ const moviecards = [
 const delay = 2500;
 
 export function Slideshow() {
+  if (localStorage.getItem('book')) {
+    var book_data = JSON.parse(localStorage.getItem('book'));
+    if (book_data != []) {
+      cards = book_data;
+    }
+  }
+
   const [index, setIndex] = React.useState(0);
   const timeoutRef = React.useRef(null);
 
@@ -103,7 +84,7 @@ export function Slideshow() {
             className="slide"
             key={index}
           >
-            <img src={pics[index]} alt="book" max-width="250px" height="100%"/>
+            <img src={cards[index].img} alt="book" max-width="250px" height="100%"/>
             <p><b>{card.title}</b></p>
           </div>
         ))}
@@ -126,6 +107,13 @@ export function Slideshow() {
 
 
 export function SlideshowMovies() {
+  if (localStorage.getItem('movie')) {
+    var movie_data = JSON.parse(localStorage.getItem('movie'));
+    if (movie_data != []) {
+      moviecards = movie_data;
+    }
+  }
+
   const [index, setIndex] = React.useState(0);
   const timeoutRef = React.useRef(null);
 
@@ -161,7 +149,7 @@ export function SlideshowMovies() {
             className="slide"
             key={index}
           >
-            <img src={moviecards[index].img} alt="book" max-width="250px" height="100%" />
+            <img src={moviecards[index].img} alt="movies" onerror="this.onerror=null; this.src='../../asset/book.jpg'" max-width="250px" height="100%" />
             <p><b>{card.title}</b></p>
           </div>
         ))}

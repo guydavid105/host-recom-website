@@ -9,15 +9,15 @@ import {Top} from "./helper/Top";
 import React, { useEffect, useState } from "react";
 import HorizontalScroll from "./helper/horizontalScroll";
 import axios from "axios";
-// const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/playlists/";
-// const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/top/artists/";
-const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/top/tracks?time_range=medium_term";
-// const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/player/currently-playing/";
+
+const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/top/tracks?limit=50";
+const USER_ENDPOINT = "https://api.spotify.com/v1/me/";
 
 
 export function Home() { 
     const [token, setToken] = useState("no");
     const [data, setData] = useState({});
+    const [username, setUsername] = useState();
     /* 
     http://localhost:3000/webapp#access_token=ABCqxL4Y&token_type=Bearer&expires_in=3600
     */
@@ -39,21 +39,22 @@ export function Home() {
     useEffect(() => {
       if (data.length) {
 
-        let songs = []
+        let songs = [{username: username}]
         // let songs = [{username: }]
 
         for (let i = 0; i < data.length; i++) {
-          let rating = 5 - (i / data.length * 2.5)
+          let rating = 5 - ((i / data.length) * 2.5);
 
           songs.push({
             title: data[i].name,
-            uid: data[i].id,
+            id: data[i].id,
             rating: rating
           })
         }
 
         let dataString = JSON.stringify(songs);
         console.log(dataString)
+        // Put dataString into API to call in python script.
       }
     }, [data])
 
@@ -80,6 +81,28 @@ export function Home() {
     });
 
     const handleGetPlaylists = () => {
+      axios
+        .get(USER_ENDPOINT, { // Add a new endpoint
+          headers: {
+            Authorization:`Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data)
+          // playlist
+          // console.log(response.data["items"][0]["images"][0]["url"])
+          // top tracks
+          // console.log(response.data["items"].length)
+          // console.log(response.data["items"][0])
+          // console.log(response.data["items"][0]["artists"][0]["name"])
+          // console.log(response.data["items"][0]["name"])
+          setUsername(response.data["id"]); 
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+
         // console.log(token);
         axios
           .get(PLAYLISTS_ENDPOINT, {
@@ -89,13 +112,6 @@ export function Home() {
           })
           .then((response) => {
             console.log(response.data)
-            // playlist
-            // console.log(response.data["items"][0]["images"][0]["url"])
-            // top tracks
-            // console.log(response.data["items"].length)
-            // console.log(response.data["items"][0])
-            // console.log(response.data["items"][0]["artists"][0]["name"])
-            // console.log(response.data["items"][0]["name"])
             setData(response.data["items"]); 
           })
           .catch((error) => {
@@ -107,10 +123,6 @@ export function Home() {
         <>
             <center>
             <Top />
-
-            {/* <img src={movie} alt="movie" height="80" ></img>
-                <img src={book} alt="book" height="80" ></img>
-                <img src={music} alt="music" height="80" ></img> */}
             
           <button 
           style={{ borderWidth:1,
@@ -163,41 +175,22 @@ export function Home() {
               </div>
             ))) : 
             
-       
             <p className="no-data">
             See more after <b>Spotify Login</b> and <b>Import</b>. 
             
             </p>
             }
             </div>
-            
-          
-           
             <br></br>
         </div>
 
         <div className="column">
           <b><i>BOOKS 📖</i> </b>  
-
             <Slideshow />
-
-
           </div>
         </div>
-
           
             <SlideshowMovies />
-            
-            {/* <HorizontalScroll /> */}
-
-          
-            {/* <h2>Try example subpage</h2> 
-            <HashLink to="/example"><i>Example Subpage</i></HashLink> */}
-           
-            {/* <h2>Developer Notice Board</h2> 
-            Change me from src/index.js <br/>
-            Other subpages implemented at src/js/ <br/>
-            Reference: <a href="https://reactjs.org">Learn React</a> <br/> */}
             </center>
 
             <Footer />
