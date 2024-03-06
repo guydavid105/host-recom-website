@@ -43,14 +43,6 @@ export function Setup(props)
             },
           })
           .then((response) => {
-            // console.log(response.data)
-            // playlist
-            // console.log(response.data["items"][0]["images"][0]["url"])
-            // top tracks
-            // console.log(response.data["items"].length)
-            // console.log(response.data["items"][0])
-            // console.log(response.data["items"][0]["artists"][0]["name"])
-            // console.log(response.data["items"][0]["name"])
             setUsername(response.data["id"]); 
           })
           .catch((error) => {
@@ -163,6 +155,7 @@ export function Setup(props)
           songs.push({
             title: data[i].name,
             uid: data[i].id,
+            img: data[i]["album"]["images"][0]["url"],
             rating: String(rating)
           })
         }
