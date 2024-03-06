@@ -60,18 +60,13 @@ class Clustering:
         self.centroids = np.random.uniform(low=-1, high=1, size=(k, self.m))
 
     def assign_clusters(self):
-        #    print(self.ratings)
         f = lambda x: np.argmin(np.sum(np.square(self.centroids - x), axis=1))
         self.clusters = np.apply_along_axis(f, 1, self.ratings)
 
-    #    print(self.centroids)
-    #    print(self.clusters)
 
     def update_centroids(self):
         vals = [[np.zeros(shape=self.m), 0] for i in range(len(self.centroids))]
         for i in range(len(self.clusters)):
-            # print(vals[self.clusters[i]][0],"ee")
-            # print(self.ratings[i])
             vals[self.clusters[i]][0] += self.ratings[i]
             vals[self.clusters[i]][1] += 1
         self.centroids = [vals[i][0] / vals[i][1] if vals[i][1] != 0 else self.centroids[i] for i in
