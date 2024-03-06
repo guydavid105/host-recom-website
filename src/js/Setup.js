@@ -2,12 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import {Top} from "./helper/Top";
 import Footer from "./helper/Footer";
-import email from '../asset/login/email.png';
-import password from '../asset/login/password.png';
-import person from '../asset/login/person.png';
 import letterboxd from '../asset/login/letterboxd.png';
 import spotifyIcon from '../asset/login/Spotify.png';
-import bookIcon from '../asset/login/books.png';
 import Goodreads from '../asset/login/goodreads.png';
 import axios from "axios";
 
