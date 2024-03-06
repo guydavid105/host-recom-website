@@ -66,7 +66,56 @@ export function Setup(props)
             });
         };
 
-    const clickHandler = ()=>{
+    const clickHandler = () => {
+        if (action === 'Login') {
+            loginClick();
+        } else {
+            signupClick();
+        }
+    }
+
+    const signupClick = () => {
+
+        let letterboxd = document.getElementById('letterboxd-id').value;
+        let goodreads = document.getElementById('goodreads-id').value;
+        const spotify = username;
+
+        let songs = [];
+        if (spotify){
+            if (data) {
+                songs = [{username: username}]
+                // let songs = [{username: }]
+        
+                for (let i = 0; i < data.length; i++) {
+                let rating = 5 - ((i / data.length) * 2.5);
+        
+                songs.push({
+                    title: data[i].name,
+                    uid: data[i].id,
+                    img: data[i]["album"]["images"][0]["url"],
+                    rating: String(rating)
+                })
+                }
+          }
+        } 
+        
+        if (goodreads === '') {
+            goodreads = '-'
+        }
+        if (letterboxd === '') {
+            letterboxd = '-'
+        }
+
+                
+        // Sends data to Guy's API, which passes into a python script
+        axios.post(`https://incubo.serveo.net/api/v1/people/post-spotify/${goodreads}/${letterboxd}`, songs).then((response) => {
+            console.log(response.data)
+        })
+
+    }
+
+
+    const loginClick = () => {
         if (localStorage.getItem('book')) {
             localStorage.removeItem('book');
         }
@@ -79,13 +128,18 @@ export function Setup(props)
 
         const letterboxd = document.getElementById('letterboxd-id').value;
         const goodreads = document.getElementById('goodreads-id').value;
+        const spotify = username;
+
         console.log(letterboxd, goodreads);
-        if(letterboxd==='' && goodreads===''){
+        if(!spotify && letterboxd==='' && goodreads===''){
             alert("Please fill in the information");
         }
         else{
             if(goodreads !== ''){
                 var url = `https://incubo.serveo.net/api/v1/people/find-by-goodreads-id/${goodreads}`;
+            }
+            else if (spotify){
+                var url = `https://incubo.serveo.net/api/v1/people/find-by-spotify-id/${spotify}`;
             }
             else {
                 var url = `https://incubo.serveo.net/api/v1/people/find-by-letterboxd-id/${letterboxd}`;
@@ -143,33 +197,6 @@ export function Setup(props)
         window.location = `/`;
     }
 
-    useEffect(() => {
-      if (data) {
-
-        let songs = [{username: username}]
-        // let songs = [{username: }]
-
-        for (let i = 0; i < data.length; i++) {
-          let rating = 5 - ((i / data.length) * 2.5);
-
-          songs.push({
-            title: data[i].name,
-            uid: data[i].id,
-            img: data[i]["album"]["images"][0]["url"],
-            rating: String(rating)
-          })
-        }
-
-        // Sends data to Guy's API, which passes into a python script
-        axios.post('https://incubo.serveo.net/api/v1/people/post-spotify', songs).then((response) => {
-          console.log(response.data)
-        })
-
-        // let dataString = JSON.stringify(songs);
-        // console.log(dataString)
-        // Put dataString into API to call in python script.
-      }
-    }, [data])
 
     const CLIENT_ID = "1d2d560c83a3419e8a003dd39460ec75";
     const SPOTIFY_AUTHORIZE_ENDPOINT="https://accounts.spotify.com/authorize";
