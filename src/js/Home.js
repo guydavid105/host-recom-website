@@ -47,7 +47,7 @@ export function Home() {
 
           songs.push({
             title: data[i].name,
-            uid: data[i].id,
+            id: data[i].id,
             rating: rating
           })
         }
