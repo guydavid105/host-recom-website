@@ -4,6 +4,7 @@ import "../timeline.css"
 import { ReactComponent as MovieIcon } from "../asset/timeline/movieIcon.svg"
 import { ReactComponent as BookIcon } from "../asset/timeline/bookIcon.svg"
 import { ReactComponent as SongIcon } from "../asset/timeline/songIcon.svg"
+import FooterCommon from "./helper/footerCommom"
 
 import timelineElements from "./timelineElements"
 
@@ -26,19 +27,19 @@ export function Timeline() {
     let bookIconStyles = { background: "#f9c74f" }
     let songIconStyles = { background: "#ffb3cc" }
 
+    const clickHandlerToHome = ()=>{
+        window.location = `/`;
+    }
+
     return (
         <>
-        <button
-            style= {{ borderWidth:1,
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor:'#06D6A0',
-            borderRadius:10,
-            padding:10,
-            }}
-        > <HashLink to={{pathname:"/"}}>Home</HashLink></button>
+        <div className={"home"} onClick={clickHandlerToHome}> 
+            Home
+        </div>
         <div>
+            <center>
             <h1 className="title">Timeline</h1>
+            </center>
             <VerticalTimeline>
                 {timelineElements.sort((event1, event2) => (dateComparer(event1, event2))).map(element => {
                     let isMovieIcon = element.type === "movie"
@@ -60,6 +61,20 @@ export function Timeline() {
                 })}
             </VerticalTimeline>
         </div>
+        <br></br>
+    <hr width="50%" color="#987cb9" size="1" />
+        
+        <table className="table_footer">
+            <tbody>
+            <tr>
+                <td>
+                    <i>A timeline showing the order of releases of the recommendations you have been given </i> &nbsp;
+                    &nbsp; <br/>
+                    <FooterCommon />  
+                </td>
+            </tr>
+            </tbody>
+        </table>
         </>
     )
 }

@@ -1,5 +1,5 @@
 body {
-  background-color: #fae5df;
+  background-color: #A7C7E7;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -9,26 +9,33 @@ body {
 }
 
 .buttonStyle {
-  border: 2px solid rgb(0, 0, 0);
+  width: 120px;
+  height: 50px;
+  border: 2px solid #77afe7;
   border-width:2px;
   align-items:'center';
   justify-content:'center';
-  background-color:#f5cac2;
-  color: #ed7966;
+  background-color:#ffffff;
+  color: #6a0dad;
   border-radius:10px;
   padding:10px;
 }
 
 h1 {
   font-weight: 600;
-  color: #ed7966;
+  color: #425871;
   background-clip: text;
   -webkit-background-clip: text;
 }
 
 h2{
   font-weight: 200;
-  color: #ed7966;
+  color: #425871;
+}
+
+.textStyle{
+  color:  #ed7966;
+  text-decoration: none !important;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -94,7 +101,7 @@ code {
   display: flex;
   flex-direction:  column;
   margin: auto;
-  background: #dac1f5;
+  background: #C3B1E1;
   padding-bottom: 30px;
   width:600px;
 }

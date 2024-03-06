@@ -9,8 +9,7 @@ export default function Footer(){
             <tbody>
             <tr>
                 <td>
-                    <i>Movies x Books x Music</i> Recommendation System!  &nbsp;
-                    <button className="button button_blogs" onClick={() => {popup()}}> Details </button>
+                    <i>Movies x Books x Music</i> Recommendation System  &nbsp;
                     &nbsp; <br/>
                     <FooterCommon />  
                 </td>
