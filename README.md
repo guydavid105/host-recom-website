@@ -1,7 +1,6 @@
 # 1b_group_project
 
 Group project to make a recommender system that works for books, movies and music.
-<<<<<<< HEAD
 =======
 
 Movies 📽 x Books 📖 x Music 🎵
@@ -51,5 +50,3 @@ Again, we are using Scrapy. This can be run with the following:
 ``
 python3 -m scrapy runspider ./goodreads/goodreads/spiders/goodreads_spider.py -a username={username} -s LOG_ENABLED=False
 ``
-
->>>>>>> 74f4500ae562d3b6886627f479593b994732697a
