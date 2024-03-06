@@ -2,12 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import {Top} from "./helper/Top";
 import Footer from "./helper/Footer";
-import email from '../asset/login/email.png';
-import password from '../asset/login/password.png';
-import person from '../asset/login/person.png';
 import letterboxd from '../asset/login/letterboxd.png';
 import spotifyIcon from '../asset/login/Spotify.png';
-import bookIcon from '../asset/login/books.png';
+import spotifyTick2 from '../asset/login/spotifyTick2-cropped.png';
 import Goodreads from '../asset/login/goodreads.png';
 import axios from "axios";
 
@@ -16,12 +13,14 @@ const USER_ENDPOINT = "https://api.spotify.com/v1/me/";
 
 export function Setup(props)
 {
-
     const [username, setUsername] = useState();
     const [data, setData] = useState();
 
     const [action,setAction] = useState("Login");
     const [val, setVal] = useState("Name");
+
+    const [icon, setIcon] = useState(spotifyIcon);
+
     const handleChange = (event) => {
         // 👇 Get input value from "event"
         setVal(event.target.value);
@@ -29,6 +28,7 @@ export function Setup(props)
 
     useEffect(() => {
         if (!data && localStorage.getItem('accessToken')) {
+            setIcon(spotifyTick2);  
             handleGetPlaylists();
         }
     })
@@ -66,7 +66,56 @@ export function Setup(props)
             });
         };
 
-    const clickHandler = ()=>{
+    const clickHandler = () => {
+        if (action === 'Login') {
+            loginClick();
+        } else {
+            signupClick();
+        }
+    }
+
+    const signupClick = () => {
+
+        let letterboxd = document.getElementById('letterboxd-id').value;
+        let goodreads = document.getElementById('goodreads-id').value;
+        const spotify = username;
+
+        let songs = [];
+        if (spotify){
+            if (data) {
+                songs = [{username: username}]
+                // let songs = [{username: }]
+        
+                for (let i = 0; i < data.length; i++) {
+                let rating = 5 - ((i / data.length) * 2.5);
+        
+                songs.push({
+                    title: data[i].name,
+                    uid: data[i].id,
+                    img: data[i]["album"]["images"][0]["url"],
+                    rating: String(rating)
+                })
+                }
+          }
+        } 
+        
+        if (goodreads === '') {
+            goodreads = '-'
+        }
+        if (letterboxd === '') {
+            letterboxd = '-'
+        }
+
+                
+        // Sends data to Guy's API, which passes into a python script
+        axios.post(`https://incubo.serveo.net/api/v1/people/post-spotify/${goodreads}/${letterboxd}`, songs).then((response) => {
+            console.log(response.data)
+        })
+
+    }
+
+
+    const loginClick = () => {
         if (localStorage.getItem('book')) {
             localStorage.removeItem('book');
         }
@@ -79,13 +128,18 @@ export function Setup(props)
 
         const letterboxd = document.getElementById('letterboxd-id').value;
         const goodreads = document.getElementById('goodreads-id').value;
+        const spotify = username;
+
         console.log(letterboxd, goodreads);
-        if(letterboxd==='' && goodreads===''){
+        if(!spotify && letterboxd==='' && goodreads===''){
             alert("Please fill in the information");
         }
         else{
             if(goodreads !== ''){
                 var url = `https://incubo.serveo.net/api/v1/people/find-by-goodreads-id/${goodreads}`;
+            }
+            else if (spotify){
+                var url = `https://incubo.serveo.net/api/v1/people/find-by-spotify-id/${spotify}`;
             }
             else {
                 var url = `https://incubo.serveo.net/api/v1/people/find-by-letterboxd-id/${letterboxd}`;
@@ -143,33 +197,6 @@ export function Setup(props)
         window.location = `/`;
     }
 
-    useEffect(() => {
-      if (data) {
-
-        let songs = [{username: username}]
-        // let songs = [{username: }]
-
-        for (let i = 0; i < data.length; i++) {
-          let rating = 5 - ((i / data.length) * 2.5);
-
-          songs.push({
-            title: data[i].name,
-            uid: data[i].id,
-            img: data[i]["album"]["images"][0]["url"],
-            rating: String(rating)
-          })
-        }
-
-        // Sends data to Guy's API, which passes into a python script
-        axios.post('https://incubo.serveo.net/api/v1/people/post-spotify', songs).then((response) => {
-          console.log(response.data)
-        })
-
-        // let dataString = JSON.stringify(songs);
-        // console.log(dataString)
-        // Put dataString into API to call in python script.
-      }
-    }, [data])
 
     const CLIENT_ID = "1d2d560c83a3419e8a003dd39460ec75";
     const SPOTIFY_AUTHORIZE_ENDPOINT="https://accounts.spotify.com/authorize";
@@ -197,7 +224,7 @@ export function Setup(props)
                     <div className={action==='Login'?"submit":"submit gray"}
                     onClick={()=>{setAction("Login")}}>Login</div> 
                     <div className="submit gray" onClick={handleSpotify}> 
-                        <img src={spotifyIcon} height="30" width="90" ></img>
+                        <img src={icon} height="30" width="90" ></img>
                     </div>    
                     <div className={action==='Sign Up'?"submit":"submit gray"}
                     onClick={()=>{setAction("Sign Up")}}>Sign Up</div>

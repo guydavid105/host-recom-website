@@ -42,11 +42,11 @@ export function Timeline() {
 
     return (
         <>
-        <div className={"home"} onClick={clickHandlerToHome}> 
-            Home
-        </div>
         <div>
             <center>
+            <div className={"home"} onClick={clickHandlerToHome}> 
+                Home
+            </div>
             <h1 className="title">Timeline</h1>
             </center>
             <VerticalTimeline>
