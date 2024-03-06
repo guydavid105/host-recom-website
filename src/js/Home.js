@@ -43,7 +43,7 @@ export function Home() {
         // let songs = [{username: }]
 
         for (let i = 0; i < data.length; i++) {
-          let rating = 5 - (i / data.length * 2.5)
+          let rating = 5 - ((i / data.length) * 2.5);
 
           songs.push({
             title: data[i].name,
@@ -54,6 +54,7 @@ export function Home() {
 
         let dataString = JSON.stringify(songs);
         console.log(dataString)
+        // Put dataString into API to call in python script.
       }
     }, [data])
 
