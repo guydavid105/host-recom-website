@@ -119,12 +119,12 @@ export function Setup(props)
                 </div>
                 {/* Option to choose from  */}
                 <div className="submit-container">
-                    <div className={action==='Sign Up'?"submit gray":"submit"}
+                    <div className={action==='Login'?"submit":"submit gray"}
                     onClick={()=>{setAction("Login")}}>Login</div> 
                     <div className="submit gray" onClick={handleSpotify}> 
                         <img src={spotifyIcon} height="30" width="90" ></img>
                     </div>    
-                    <div className={action==='Login'?"submit gray":"submit"}
+                    <div className={action==='Sign Up'?"submit":"submit gray"}
                     onClick={()=>{setAction("Sign Up")}}>Sign Up</div>
                 </div>
                 {/* IO */}

@@ -125,37 +125,18 @@ export function Home() {
             <Top />
             
           <button 
-          style={{ borderWidth:1,
-            alignItems:'center',
-            justifyContent:'center',
-            backgroundColor:'#dac1f5',
-            borderRadius:10,
-            padding: 10,
-          }}
+          class= "buttonStyle"
           onClick={handleGetPlaylists}> <HashLink to={{pathname:"/setup"}}> Login</HashLink></button>
 
           <button
-          style= {{ borderWidth:1,
-            alignItems:'center',
-            justifyContent:'center',
-            backgroundColor:'#dac1f5',
-            borderRadius:10,
-            padding:10,
-          }}
+          class= "buttonStyle"
           > <HashLink to={{pathname:"./timeline"}}>Recommendation Timeline</HashLink></button>
 
         <div className="column">
           <div className="column">
 
           <button 
-            style={{ borderWidth:1,
-              alignItems:'center',
-              justifyContent:'center',
-              width:250,
-              height:40,
-              backgroundColor:'#dac1f5',
-              borderRadius:100,
-            }}
+            class= "buttonStyle"
           onClick={handleGetPlaylists}> Login ☝️ <u>Import 👈</u> Spotify Data</button> 
             {/* <b><i>Your</i> Top Tracks</b>   */}
             <b><i>MUSIC 🎵</i> </b>  
