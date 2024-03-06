@@ -102,3 +102,24 @@ class Clustering:
             d[int(self.clusters[i])].append(name[i])
 
         return json.dumps(d)
+
+    def get_similar(self,name,num=-1):
+        idx=-1
+        for i in range(self.n):
+            if self.names[i]==name:
+                idx=i
+                break
+
+        if idx==-1:
+            raise Exception("Not found")
+
+        ans = []
+
+        for i in np.random.permutation(self.n):
+            if i!=idx and self.clusters[i]==self.clusters[idx]:
+                ans.append(self.names[i])
+                if len(ans)==num:
+                    break
+
+        return ans
+
