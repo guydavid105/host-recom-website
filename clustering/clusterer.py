@@ -94,7 +94,7 @@ class Clustering:
         d = defaultdict(lambda: [])
 
         for i in range(self.n):
-            d[int(self.clusters[i])].append(name[i])
+            d[int(self.clusters[i])].append(self.names[i])
 
         return json.dumps(d)
 
