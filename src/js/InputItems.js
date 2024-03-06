@@ -27,7 +27,7 @@ export function InputItems(){
 
         if (item1 === '' && item2 === '' && item3 === '' && item4 === '' && item5 === '') {
             alert("Please fill in the information");
-        } 
+        }
         else {
             if (item1 == '') {
                 item1 = '-';
