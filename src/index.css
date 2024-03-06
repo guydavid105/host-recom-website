@@ -26,6 +26,10 @@ h1 {
   -webkit-background-clip: text;
 }
 
+h2{
+  font-weight: 200;
+  color: #ed7966;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -130,6 +134,7 @@ code {
   margin: auto;
   width: 480px;
   height: 60px;
+  padding:10px;
   background: #eaeaea;
   border-radius: 6px;
 }

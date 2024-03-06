@@ -10,6 +10,7 @@ import {NotFound} from "./js/404";
 import { Example } from './js/ExampleSubpage';
 import { Setup } from './js/Setup';
 import { Timeline } from './js/TimelinePage';
+import { InputItems} from './js/InputItems';
 
 import { ScrollToTop } from './js/helper/ScrollToTop';
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/example" element={<Example />}/>
           <Route path="/setup" element={<Setup />}/>
           <Route path="/timeline" element={<Timeline />}/>
+          <Route path="/InputItems" element={<InputItems />}/>
 
           {/* <Route path='/*' element={<NotFound />}/> */}
           <Route path='/*' element={<Home />}/>

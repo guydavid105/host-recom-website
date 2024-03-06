@@ -135,7 +135,9 @@ export function Home() {
           <button
           class= "buttonStyle"
           > <HashLink to={{pathname:"./timeline"}}>Recommendation Timeline</HashLink></button>
-
+          <button
+          class= "buttonStyle"
+          ><HashLink to={{pathname:"./InputItems"}}>Input Items</HashLink></button>
         <div className="column">
           <div className="column">
 
