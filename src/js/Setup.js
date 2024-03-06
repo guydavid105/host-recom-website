@@ -4,6 +4,7 @@ import {Top} from "./helper/Top";
 import Footer from "./helper/Footer";
 import letterboxd from '../asset/login/letterboxd.png';
 import spotifyIcon from '../asset/login/Spotify.png';
+import spotifyTick2 from '../asset/login/spotifyTick2-cropped.png';
 import Goodreads from '../asset/login/goodreads.png';
 import axios from "axios";
 
@@ -12,12 +13,14 @@ const USER_ENDPOINT = "https://api.spotify.com/v1/me/";
 
 export function Setup(props)
 {
-
     const [username, setUsername] = useState();
     const [data, setData] = useState();
 
     const [action,setAction] = useState("Login");
     const [val, setVal] = useState("Name");
+
+    const [icon, setIcon] = useState(spotifyIcon);
+
     const handleChange = (event) => {
         // 👇 Get input value from "event"
         setVal(event.target.value);
@@ -25,6 +28,7 @@ export function Setup(props)
 
     useEffect(() => {
         if (!data && localStorage.getItem('accessToken')) {
+            setIcon(spotifyTick2);  
             handleGetPlaylists();
         }
     })
@@ -220,7 +224,7 @@ export function Setup(props)
                     <div className={action==='Login'?"submit":"submit gray"}
                     onClick={()=>{setAction("Login")}}>Login</div> 
                     <div className="submit gray" onClick={handleSpotify}> 
-                        <img src={spotifyIcon} height="30" width="90" ></img>
+                        <img src={icon} height="30" width="90" ></img>
                     </div>    
                     <div className={action==='Sign Up'?"submit":"submit gray"}
                     onClick={()=>{setAction("Sign Up")}}>Sign Up</div>
