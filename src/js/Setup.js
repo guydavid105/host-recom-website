@@ -121,7 +121,6 @@ export function Setup(props)
                 <div className="submit-container">
                     <div className={action==='Sign Up'?"submit gray":"submit"}
                     onClick={()=>{setAction("Login")}}>Login</div> 
-                    <div className={action==='Sign Up'?"submit gray":"submit"} onClick={handleSpotify}> 
                     <div className="submit gray" onClick={handleSpotify}> 
                         <img src={spotifyIcon} height="30" width="90" ></img>
                     </div>    
@@ -147,17 +146,14 @@ export function Setup(props)
                         Submit
                     </div>
                     <div className={"home"} onClick={clickHandlerToHome}> 
-                        🏠HOME
                         Home
                     </div>
                 </div>
 
-
-
+            
             </div>
-            </center>
-       
+        </center>
         <Footer />
-        </>
+    </>
     )
 }
