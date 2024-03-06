@@ -23,8 +23,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 See more at [React.md](./doc/React.md)
 
-![Website Gallery View](./doc/photo/Website-v1.png)
-
 Dependencies:
 ```
 npm i react-vertical-timeline-component
