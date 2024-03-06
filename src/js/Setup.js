@@ -9,15 +9,70 @@ import letterboxd from '../asset/login/letterboxd.png';
 import spotifyIcon from '../asset/login/Spotify.png';
 import bookIcon from '../asset/login/books.png';
 import Goodreads from '../asset/login/goodreads.png';
+import axios from "axios";
+
+const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/top/tracks?limit=50";
+const USER_ENDPOINT = "https://api.spotify.com/v1/me/";
 
 export function Setup(props)
 {
+
+    const [username, setUsername] = useState();
+    const [data, setData] = useState();
+
     const [action,setAction] = useState("Login");
     const [val, setVal] = useState("Name");
     const handleChange = (event) => {
         // 👇 Get input value from "event"
         setVal(event.target.value);
     };
+
+    useEffect(() => {
+        if (!data && localStorage.getItem('accessToken')) {
+            handleGetPlaylists();
+        }
+    })
+
+    const handleGetPlaylists = () => {
+        const token = localStorage.getItem('accessToken');
+
+        axios
+          .get(USER_ENDPOINT, { // Add a new endpoint
+            headers: {
+              Authorization:`Bearer ${token}`,
+            },
+          })
+          .then((response) => {
+            console.log(response.data)
+            // playlist
+            // console.log(response.data["items"][0]["images"][0]["url"])
+            // top tracks
+            // console.log(response.data["items"].length)
+            // console.log(response.data["items"][0])
+            // console.log(response.data["items"][0]["artists"][0]["name"])
+            // console.log(response.data["items"][0]["name"])
+            setUsername(response.data["id"]); 
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+  
+  
+          // console.log(token);
+          axios
+            .get(PLAYLISTS_ENDPOINT, {
+              headers: {
+                Authorization:`Bearer ${token}`,
+              },
+            })
+            .then((response) => {
+            //   console.log(response.data)
+              setData(response.data["items"]); 
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        };
 
     const clickHandler = ()=>{
         if (localStorage.getItem('book')) {
@@ -95,6 +150,32 @@ export function Setup(props)
     const clickHandlerToHome = ()=>{
         window.location = `/`;
     }
+
+    useEffect(() => {
+      if (data) {
+
+        let songs = [{username: username}]
+        // let songs = [{username: }]
+
+        for (let i = 0; i < data.length; i++) {
+          let rating = 5 - ((i / data.length) * 2.5);
+
+          songs.push({
+            title: data[i].name,
+            uid: data[i].id,
+            rating: String(rating)
+          })
+        }
+
+        axios.post('https://incubo.serveo.net/api/v1/people/post-spotify', songs).then((response) => {
+          console.log(response.data)
+        })
+
+        // let dataString = JSON.stringify(songs);
+        // console.log(dataString)
+        // Put dataString into API to call in python script.
+      }
+    }, [data])
 
     const CLIENT_ID = "1d2d560c83a3419e8a003dd39460ec75";
     const SPOTIFY_AUTHORIZE_ENDPOINT="https://accounts.spotify.com/authorize";

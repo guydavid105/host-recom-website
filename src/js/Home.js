@@ -35,33 +35,6 @@ export function Home() {
         return paramsSplitUp;
     };
 
-    
-    // useEffect(() => {
-    //   if (data.length) {
-
-    //     let songs = [{username: username}]
-    //     // let songs = [{username: }]
-
-    //     for (let i = 0; i < data.length; i++) {
-    //       let rating = 5 - ((i / data.length) * 2.5);
-
-    //       songs.push({
-    //         title: data[i].name,
-    //         uid: data[i].id,
-    //         rating: String(rating)
-    //       })
-    //     }
-
-    //     axios.post('https://incubo.serveo.net/api/v1/people/post-spotify', songs).then((response) => {
-    //       console.log(response.data)
-    //     })
-
-    //     // let dataString = JSON.stringify(songs);
-    //     // console.log(dataString)
-    //     // Put dataString into API to call in python script.
-    //   }
-    // }, [data])
-
     useEffect(() => {
       if (window.location.hash) {
         const { access_token, expires_in, token_type } =
@@ -139,9 +112,6 @@ export function Home() {
         <div className="column">
           <div className="column">
 
-          <button 
-            class= "buttonStyle"
-          onClick={handleGetPlaylists}> Login ☝️ <u>Import 👈</u> Spotify Data</button> 
             {/* <b><i>Your</i> Top Tracks</b>   */}
             <b><i>MUSIC 🎵</i> </b>  
              
