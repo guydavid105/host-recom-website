@@ -97,9 +97,12 @@ export function Setup(props)
             letterboxd = '-'
         }
 
-                
-        // Sends data to Guy's API, which passes into a python script
-        axios.post(`https://incubo.serveo.net/api/v1/people/post-spotify/${goodreads}/${letterboxd}`, songs).then((response) => {})
+        try {
+            // Sends data to Guy's API, which passes into a python script
+            axios.post(`https://incubo.serveo.net/api/v1/people/post-spotify/${goodreads}/${letterboxd}`, songs).then((response) => {});
+        } catch (error) {
+            console.error(error);
+        }
     }
 
 
@@ -123,14 +126,18 @@ export function Setup(props)
             alert("Please fill in the information");
         }
         else{
-            if(goodreads !== ''){
-                var url = `https://incubo.serveo.net/api/v1/people/find-by-goodreads-id/${goodreads}`;
-            }
-            else if (spotify){
-                var url = `https://incubo.serveo.net/api/v1/people/find-by-spotify-id/${spotify}`;
-            }
-            else {
-                var url = `https://incubo.serveo.net/api/v1/people/find-by-letterboxd-id/${letterboxd}`;
+            try {
+                if(goodreads !== ''){
+                    var url = `https://incubo.serveo.net/api/v1/people/find-by-goodreads-id/${goodreads}`;
+                }
+                else if (spotify){
+                    var url = `https://incubo.serveo.net/api/v1/people/find-by-spotify-id/${spotify}`;
+                }
+                else {
+                    var url = `https://incubo.serveo.net/api/v1/people/find-by-letterboxd-id/${letterboxd}`;
+                }
+            } catch (error) {
+                console.error(error);
             }
 
             const user_data = async () => {
