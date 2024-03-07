@@ -12,15 +12,17 @@ class LetterboxdSpider(scrapy.Spider):
             raise ValueError('No username provided. Please provide a username with the -a flag.')
         
         url = [f'https://letterboxd.com/{username}/films/']
+
+        pagecount = 0
         
         # Init json with username
         filename = f'{username}_film_data.json'
         with open(filename, 'w') as file:
             json.dump([{"username" : username}], file)
-        yield scrapy.Request(url=url[0], callback=self.parse, cb_kwargs={'username': username})
+        yield scrapy.Request(url=url[0], callback=self.parse, cb_kwargs={'username': username, 'pagecount': pagecount})
     
 
-    def parse(self, response, username):
+    def parse(self, response, username, pagecount):
         """
         Parse the response from the website and extract film information.
 
@@ -99,8 +101,8 @@ class LetterboxdSpider(scrapy.Spider):
 
         # Follow pagination links, and repeat
         next_page = response.css('li.paginate-current + li a::attr(href)').get()
-        if next_page is not None:
-            yield response.follow(next_page, self.parse, cb_kwargs={'username': username})
+        if ((next_page is not None) and pagecount < 8):
+            yield response.follow(next_page, self.parse, cb_kwargs={'username': username, 'pagecount': pagecount})
         else:
             # load in JSON to update
             filename = f'{username}_film_data.json'
