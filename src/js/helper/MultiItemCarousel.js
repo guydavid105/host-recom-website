@@ -143,8 +143,8 @@ export function BookCarousel() {
 };
 
 export function MusicCarousel() {
-    if (localStorage.getItem('music')) {
-        var music_data = JSON.parse(localStorage.getItem('music'));
+    if (localStorage.getItem('song')) {
+        var music_data = JSON.parse(localStorage.getItem('song'));
         if (music_data != []) {
           musiccards = music_data;
         }
