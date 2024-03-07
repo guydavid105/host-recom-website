@@ -21,6 +21,10 @@ body {
   padding:10px;
 }
 
+.buttonStyle:hover{
+  background-color: beige;
+}
+
 h1 {
   font-size: 4em;
   color: #04395e;
@@ -201,9 +205,15 @@ code {
   cursor: pointer;
 }
 
+
+
 .gray{
   background: #EAEAEA;
   color: #676767;
+}
+
+.gray:hover{
+  background: #a6a6a6;
 }
 
 .home-container{
@@ -224,6 +234,10 @@ code {
   font-size: 19px;
   font-weight: 700;
   cursor: pointer;
+}
+
+.home:hover{
+  background-color: beige;
 }
 
 .recommendation-box {
