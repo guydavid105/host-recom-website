@@ -1,13 +1,8 @@
-import book from '../asset/book.jpg';
-import music from '../asset/music.jpg';
-import movie from '../asset/movie.jpg';
-import music_mp3 from '../asset/audio/Town_of_Windmill.mp3';
 import {Slideshow, SlideshowMovies} from './helper/slideShow';
 import { HashLink } from 'react-router-hash-link';
 import Footer from "./helper/Footer";
 import {Top} from "./helper/Top";
 import React, { useEffect, useState } from "react";
-import HorizontalScroll from "./helper/horizontalScroll";
 import axios from "axios";
 
 const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/top/tracks?limit=50";
@@ -26,7 +21,6 @@ export function Home() {
         const stringAfterHashtag = hash.substring(1);
         const paramsInUrl = stringAfterHashtag.split("&");
         const paramsSplitUp = paramsInUrl.reduce((accumulator, currentValue) => {
-        console.log(currentValue);
         const [key, value] = currentValue.split("=");
         accumulator[key] = value;
         return accumulator;
@@ -46,12 +40,8 @@ export function Home() {
         let today = new Date();
         let time = today.getTime() + parseInt(expires_in) * 1000;
         localStorage.setItem("expiresIn", time);
- 
-        console.log(localStorage.getItem("accessToken"));
-    
+     
         if(data.length===0){
-          console.log(token_type);
-          console.log(expires_in);
           alert("Login Spotify Success!");
         }
         if(localStorage.getItem("accessToken")){
@@ -68,14 +58,6 @@ export function Home() {
           },
         })
         .then((response) => {
-          console.log(response.data)
-          // playlist
-          // console.log(response.data["items"][0]["images"][0]["url"])
-          // top tracks
-          // console.log(response.data["items"].length)
-          // console.log(response.data["items"][0])
-          // console.log(response.data["items"][0]["artists"][0]["name"])
-          // console.log(response.data["items"][0]["name"])
           setUsername(response.data["id"]); 
         })
         .catch((error) => {
@@ -83,7 +65,6 @@ export function Home() {
         });
 
 
-        // console.log(token);
         axios
           .get(PLAYLISTS_ENDPOINT, {
             headers: {
@@ -91,7 +72,6 @@ export function Home() {
             },
           })
           .then((response) => {
-            console.log(response.data)
             setData(response.data["items"]); 
           })
           .catch((error) => {
@@ -139,7 +119,6 @@ export function Home() {
               (<div className="song-info">
                 {item.album.images.length>0 &&(
                <img src={item.album.images[0].url} alt={item.name} className='album-image' height="15"></img>)}
-              {/* <p className='song-name'>{item.name}</p> --- <p className='artist-name'><i>{item.artists[0].name}</i></p> */}
                 <b>{item.name}</b> --- <i>{item.artists[0].name}</i>
               </div>
                )}

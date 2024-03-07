@@ -42,7 +42,6 @@ const HorizontalScrollCarousel = () => {
         const response = await fetch('http://localhost:8080/api/v1/people/recomm/test/476376617723');
         const data = await response.json();
         setJsonData(data);
-        // console.log(data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -54,11 +53,6 @@ const HorizontalScrollCarousel = () => {
   return (
     <section ref={targetRef} className="relative h-[300vh] bg-neutral-900">
              <div>
-    {/* {jsonData ? (
-      <pre>{JSON.stringify(jsonData, null, 2)}</pre>
-    ) : (
-      <p>Loading...</p>
-    )} */}
     </div>
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
         <motion.div style={{ x }} className="flex gap-4">
@@ -66,14 +60,6 @@ const HorizontalScrollCarousel = () => {
         {jsonDataFixed.map((card) => {
             return <Card card={card} key={card.id} />;
           })}
-          {/* {jsonData.map((card) => {
-            return <Card card={card} key={card.id} />;
-          })} */}
-          {/* {jsonData ? (
-      <pre>{JSON.stringify(jsonData, null, 2)}</pre>
-    ) : (
-       
-    )} */}
         </motion.div>
       </div>
     </section>
@@ -91,7 +77,6 @@ const Card = ({ card }) => {
     >
       <div
         style={{
-          // backgroundImage: `url(${"./asset/movie.jpg"})`,
           backgroundColor: "black",
           backgroundSize: "cover",
           backgroundPosition: "center",
