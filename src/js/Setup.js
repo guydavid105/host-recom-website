@@ -144,11 +144,11 @@ export function Setup(props)
                     if(goodreads !== ''){
                         var url = `https://incubo.serveo.net/api/v1/people/find-by-goodreads-id/${goodreads}`;
                     }
-                    else if (spotify){
-                        var url = `https://incubo.serveo.net/api/v1/people/find-by-spotify-id/${spotify}`;
+                    else if (letterboxd){
+                        var url = `https://incubo.serveo.net/api/v1/people/find-by-letterboxd-id/${letterboxd}`;
                     }
                     else {
-                        var url = `https://incubo.serveo.net/api/v1/people/find-by-letterboxd-id/${letterboxd}`;
+                        var url = `https://incubo.serveo.net/api/v1/people/find-by-spotify-id/${spotify}`;
                     }
                 } catch (error) {
                     console.error(error);
