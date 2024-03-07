@@ -69,128 +69,139 @@ export function Setup(props)
     }
 
     const signupClick = () => {
+        if(!thinking){
 
-        let letterboxd = document.getElementById('letterboxd-id').value;
-        let goodreads = document.getElementById('goodreads-id').value;
-        const spotify = username;
+            let letterboxd = document.getElementById('letterboxd-id').value;
+            let goodreads = document.getElementById('goodreads-id').value;
+            const spotify = username;
 
-        let songs = [];
-        if (spotify && data){
-            songs = [{username: username}]
-    
-            for (let i = 0; i < data.length; i++) {
-                let rating = 5 - ((i / (data.length - 1)) * 2.5);
+            let songs = [];
+            if (spotify && data){
+                songs = [{username: username}]
         
-                songs.push({
-                    title: data[i].name,
-                    uid: data[i].id,
-                    year: data[i]["album"]["release_date"].split("-")[0],
-                    img: data[i]["album"]["images"][0]["url"],
-                    rating: String(rating)
-                })
+                for (let i = 0; i < data.length; i++) {
+                    let rating = 5 - ((i / (data.length - 1)) * 2.5);
+            
+                    songs.push({
+                        title: data[i].name,
+                        uid: data[i].id,
+                        year: data[i]["album"]["release_date"].split("-")[0],
+                        img: data[i]["album"]["images"][0]["url"],
+                        rating: String(rating)
+                    })
+                }
+            } 
+            
+            if (goodreads === '') {
+                goodreads = '-'
             }
-        } 
-        
-        if (goodreads === '') {
-            goodreads = '-'
-        }
-        if (letterboxd === '') {
-            letterboxd = '-'
-        }
+            if (letterboxd === '') {
+                letterboxd = '-'
+            }
 
-        try {
-            setThinking(true);
-            alert("Collecting data... Please wait!");
-            // Sends data to Guy's API, which passes into a python script
-            axios.post(`https://incubo.serveo.net/api/v1/people/post-spotify/${goodreads}/${letterboxd}`, songs).then((response) => {
+            try {
+                setThinking(true);
+                alert("Collecting data... Please wait!");
+                // Sends data to Guy's API, which passes into a python script
+                axios.post(`https://incubo.serveo.net/api/v1/people/post-spotify/${goodreads}/${letterboxd}`, songs).then((response) => {
+                    setThinking(false);
+                    loginClick();
+                });
+            } catch (error) {
                 setThinking(false);
-            });
-            loginClick();
-        } catch (error) {
-            console.error(error);
+                console.error(error);
+            }
+        }
+        else{
+            alert("Please wait for the data to be collected!");
         }
     }
 
 
     const loginClick = () => {
-        if (localStorage.getItem('book')) {
-            localStorage.removeItem('book');
-        }
-        if (localStorage.getItem('movie')) {
-            localStorage.removeItem('movie');
-        }
-        if (localStorage.getItem('song')) {
-            localStorage.removeItem('song');
-        }
-
-        const letterboxd = document.getElementById('letterboxd-id').value;
-        const goodreads = document.getElementById('goodreads-id').value;
-        const spotify = username;
-
-        // console.log(letterboxd, goodreads);
-        if(!spotify && letterboxd==='' && goodreads===''){
-            alert("Please fill in the information");
-        }
-        else{
-            alert("Signing you in!");
-            try {
-                if(goodreads !== ''){
-                    var url = `https://incubo.serveo.net/api/v1/people/find-by-goodreads-id/${goodreads}`;
-                }
-                else if (spotify){
-                    var url = `https://incubo.serveo.net/api/v1/people/find-by-spotify-id/${spotify}`;
-                }
-                else {
-                    var url = `https://incubo.serveo.net/api/v1/people/find-by-letterboxd-id/${letterboxd}`;
-                }
-            } catch (error) {
-                console.error(error);
+        if (!thinking){
+            if (localStorage.getItem('book')) {
+                localStorage.removeItem('book');
+            }
+            if (localStorage.getItem('movie')) {
+                localStorage.removeItem('movie');
+            }
+            if (localStorage.getItem('song')) {
+                localStorage.removeItem('song');
             }
 
-            const user_data = async () => {
-                const response = await fetch(url);
-                const data = await response.json();
-                if (data.length === 0) {
-                    alert("User not found!");
+            const letterboxd = document.getElementById('letterboxd-id').value;
+            const goodreads = document.getElementById('goodreads-id').value;
+            const spotify = username;
+
+            // console.log(letterboxd, goodreads);
+            if(!spotify && letterboxd==='' && goodreads===''){
+                alert("Please fill in the information");
+            }
+            else{
+                alert("Signing you in!");
+                try {
+                    if(goodreads !== ''){
+                        var url = `https://incubo.serveo.net/api/v1/people/find-by-goodreads-id/${goodreads}`;
+                    }
+                    else if (spotify){
+                        var url = `https://incubo.serveo.net/api/v1/people/find-by-spotify-id/${spotify}`;
+                    }
+                    else {
+                        var url = `https://incubo.serveo.net/api/v1/people/find-by-letterboxd-id/${letterboxd}`;
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+
+                const user_data = async () => {
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    if (data.length === 0) {
+                        alert("User not found!");
+                        window.location = `/`;
+                    }
+                    return data;
+                };
+                async function recommendations(){
+                    const data = await user_data();
+                    const user_id = data[0].user_id;
+
+                    const book_url = `https://incubo.serveo.net/api/v1/people/recomm/book/${user_id}`;
+                    const book_response = await fetch(book_url);
+                    const book_data = await book_response.json();
+                    // console.log(book_data);
+
+                    const movie_url = `https://incubo.serveo.net/api/v1/people/recomm/movie/${user_id}`;
+                    const movie_response = await fetch(movie_url);
+                    const movie_data = await movie_response.json();
+                    // console.log(movie_data);
+
+                    const song_url = `https://incubo.serveo.net/api/v1/people/recomm/song/${user_id}`;
+                    const song_response = await fetch(song_url);
+                    const song_data = await song_response.json();
+                    // console.log(song_data);
+
+                    if (book_data.length != 0) {
+                        localStorage.setItem('book', JSON.stringify(book_data));
+                    }
+
+                    if (movie_data.length != 0) {
+                        localStorage.setItem('movie', JSON.stringify(movie_data));
+                    }
+
+                    if (song_data.length != 0) {
+                        localStorage.setItem('song', JSON.stringify(song_data));
+                    }
+
+                    alert("Login Success!");
                     window.location = `/`;
-                }
-                return data;
-            };
-            async function recommendations(){
-                const data = await user_data();
-                const user_id = data[0].user_id;
-
-                const book_url = `https://incubo.serveo.net/api/v1/people/recomm/book/${user_id}`;
-                const book_response = await fetch(book_url);
-                const book_data = await book_response.json();
-                // console.log(book_data);
-
-                const movie_url = `https://incubo.serveo.net/api/v1/people/recomm/movie/${user_id}`;
-                const movie_response = await fetch(movie_url);
-                const movie_data = await movie_response.json();
-                // console.log(movie_data);
-
-                const song_url = `https://incubo.serveo.net/api/v1/people/recomm/song/${user_id}`;
-                const song_response = await fetch(song_url);
-                const song_data = await song_response.json();
-                // console.log(song_data);
-
-                if (book_data.length != 0) {
-                    localStorage.setItem('book', JSON.stringify(book_data));
-                }
-
-                if (movie_data.length != 0) {
-                    localStorage.setItem('movie', JSON.stringify(movie_data));
-                }
-
-                if (song_data.length != 0) {
-                    localStorage.setItem('song', JSON.stringify(song_data));
-                }
-
-                alert("Login Success!");
-                window.location = `/`;
-            };
-            recommendations();
+                };
+                recommendations();
+            }
+        }
+        else {
+            alert("Please wait for your account to be created!");
         }
     }
 
