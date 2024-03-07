@@ -78,7 +78,7 @@ export function Setup(props)
             songs = [{username: username}]
     
             for (let i = 0; i < data.length; i++) {
-            let rating = 5 - ((i / data.length) * 2.5);
+            let rating = 5 - ((i / (data.length - 1)) * 2.5);
     
             songs.push({
                 title: data[i].name,
