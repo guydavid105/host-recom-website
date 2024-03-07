@@ -92,6 +92,7 @@ export function Setup(props)
                 songs.push({
                     title: data[i].name,
                     uid: data[i].id,
+                    year: data[i]["album"]["release_date"].split("-")[0],
                     img: data[i]["album"]["images"][0]["url"],
                     rating: String(rating)
                 })
