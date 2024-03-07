@@ -6,13 +6,11 @@ import reportWebVitals from './reportWebVitals';
 import { Route,Routes, useLocation,HashRouter as Router} from 'react-router-dom';
 import { AnimatePresence } from "framer-motion";
 import {Home} from "./js/Home";
-import {NotFound} from "./js/404";
 import { Example } from './js/ExampleSubpage';
 import { Setup } from './js/Setup';
 import { Timeline } from './js/TimelinePage';
 import { InputItems} from './js/InputItems';
 
-import { ScrollToTop } from './js/helper/ScrollToTop';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -21,7 +19,6 @@ function App() {
   const location = useLocation();
   return (
   <> 
-      {/* <ScrollToTop> */}
       <AnimatePresence mode='wait'>
         <Routes key={location.pathname} location={location}>
           <Route path="/" element={<Home />}/>
@@ -34,7 +31,6 @@ function App() {
           <Route path='/*' element={<Home />}/>
         </Routes> 
       </AnimatePresence>
-      {/* </ScrollToTop> */}
       </>
   )
 }
