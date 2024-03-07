@@ -4,8 +4,7 @@ import movie from '../asset/movie.jpg';
 import music_mp3 from '../asset/audio/Town_of_Windmill.mp3';
 //import {Slideshow, SlideshowMovies} from './helper/slideShow';
 //import {Slideshow} from './helper/slideShow';
-import { MovieCarousel } from './helper/MultiItemCarousel';
-import { BookCarousel } from './helper/MultiItemCarousel';
+import { MovieCarousel, BookCarousel, MusicCarousel } from './helper/MultiItemCarousel';
 import { HashLink } from 'react-router-hash-link';
 import Footer from "./helper/Footer";
 import {Top} from "./helper/Top";
@@ -112,46 +111,17 @@ export function Home() {
               Input Items
             </HashLink>
           </button>
-        <div className="column">
-          <div className="column">
 
-            {/* <b><i>Your</i> Top Tracks</b>   */}
-            <b><i>MUSIC 🎵</i> </b>  
-             
-            <div className='recommendation-box'>
-            { data.length>0? (data.map((item, index) => (
-              <div key={index} className='recommendation-item'>
-              {/* Check if "artists" array exists and has at least one item */}
-              {item.artists && item.artists.length > 0 && 
-              (<div className="song-info">
-                {item.album.images.length>0 &&(
-               <img src={item.album.images[0].url} alt={item.name} className='album-image' height="15"></img>)}
-                <b>{item.name}</b> --- <i>{item.artists[0].name}</i>
-              </div>
-               )}
-              </div>
-            ))) : 
-            
-            <p className="no-data">
-            See more after <b>Spotify Login</b> and <b>Import</b>. 
-            
-            </p>
-            }
+            <div>
+            <h2><i>MUSIC 🎵</i></h2>
+            <MusicCarousel />
             </div>
-            <br></br>
-        </div>
-
-        </div>
             <div>
             <h2><i>BOOKS 📖</i></h2>
-            </div>
-            <div>
             <BookCarousel />
             </div>
             <div>
             <h2><i>MOVIES 🎬</i></h2>
-            </div>
-            <div>
             <MovieCarousel />
             </div>
             </center>

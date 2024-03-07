@@ -22,6 +22,14 @@ let bookcards = [
   {img: book6, title: "Introduction to Algorithms", id: 6}
 ];
 
+let musiccards = [
+    {img: "https://i.scdn.co/image/ab67616d0000b273e5736e58acf1f0a365fbeabd", title: "Stars and the Moon", id:1},
+    {img: "https://i.scdn.co/image/ab67616d0000b2736c582022e90b11f0da287a9a", title: "It's Not Living (If It's Not With You)", id: 2},
+    {img: "https://i.scdn.co/image/ab67616d0000b2732c8b15493b4ea185c364e495", title: "Guys", id: 3},
+    {img: "https://i.scdn.co/image/ab67616d0000b273592889d4d323785856f18770", title: "Fallingforyou", id: 4},
+    {img: "https://i.scdn.co/image/ab67616d0000b273636b5f841e42fc5559bfabfd", title: "Older", id: 5},
+    {img: "https://i.scdn.co/image/ab67616d0000b2731f44db452a68e229650a302c", title: "About You", id: 6}
+];
 
 let moviecards = [
   { id: 706083, type: "movie", title: "Wonka", img: "https://a.ltrbxd.com/resized/film-poster/7/0/6/0/8/3/706083-wonka-0-500-0-750-crop.jpg" },
@@ -124,6 +132,46 @@ export function BookCarousel() {
                     return (
                         <div className="slider" key={index}>
                             <img src={card.img} alt="book" width="100%" max-height="100%"/>
+                            <p><b>{card.title}</b></p>
+                        </div>
+                    );
+                })}
+            </Carousel>
+        </div>
+        </>
+    );
+};
+
+export function MusicCarousel() {
+    if (localStorage.getItem('music')) {
+        var music_data = JSON.parse(localStorage.getItem('music'));
+        if (music_data != []) {
+          musiccards = music_data;
+        }
+    }
+    return (
+        <>
+        <div className="parent">
+            <Carousel
+                additionalTransform={0}
+                arrows
+                responsive={responsive}
+                autoPlay={true}
+                autoPlaySpeed={3000}
+                className=""
+                swipeable={true}
+                draggable={true}
+                showDots={false}
+                infinite={true}
+                keyBoardControl
+                pauseOnHover
+                partialVisible={true}
+            >
+                {musiccards
+                .map((card, index) => {
+                    return (
+                        <div className="slider" key={index}>
+                            <img src={card.img} alt="music" width="100%" max-height="100%"/>
                             <p><b>{card.title}</b></p>
                         </div>
                     );
