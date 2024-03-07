@@ -26,11 +26,10 @@ body {
 }
 
 h1 {
-  font-size: 4em;
+  font-size: 3em;
   color: #04395e;
   background-clip: text;
   -webkit-background-clip: text;
-  font-size: 4em;
   text-align: center;
   font-family: "Bebas Neue", sans-serif;
   text-shadow: -2px 0 #0a1128, 0 2px #0a1128, 2px 0 #0a1128, 0 -2px #0a1128;
