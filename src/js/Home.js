@@ -1,4 +1,3 @@
-import {Slideshow, SlideshowMovies} from './helper/slideShow';
 import book from '../asset/book.jpg';
 import music from '../asset/music.jpg';
 import movie from '../asset/movie.jpg';
@@ -143,10 +142,18 @@ export function Home() {
         </div>
 
         </div>
+            <div>
             <h2><i>BOOKS 📖</i></h2>
+            </div>
+            <div>
             <BookCarousel />
+            </div>
+            <div>
             <h2><i>MOVIES 🎬</i></h2>
+            </div>
+            <div>
             <MovieCarousel />
+            </div>
             </center>
 
             <Footer />
