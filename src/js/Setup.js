@@ -28,7 +28,9 @@ export function Setup(props)
 
     useEffect(() => {
         if (!data && localStorage.getItem('accessToken')) {
-            setIcon(spotifyTick2);  
+            if (localStorage.getItem('expiresIn') > new Date().getTime()) {
+                setIcon(spotifyTick2);  
+            }
             handleGetPlaylists();
         }
     })

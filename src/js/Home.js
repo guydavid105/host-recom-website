@@ -42,7 +42,10 @@ export function Home() {
         localStorage.clear();
         localStorage.setItem("accessToken", access_token);
         localStorage.setItem("tokenType", token_type);
-        localStorage.setItem("expiresIn", expires_in);
+
+        let today = new Date();
+        let time = today.getTime() + parseInt(expires_in) * 1000;
+        localStorage.setItem("expiresIn", time);
  
         console.log(localStorage.getItem("accessToken"));
     
