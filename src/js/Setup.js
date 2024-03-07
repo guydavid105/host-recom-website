@@ -17,6 +17,7 @@ export function Setup(props)
     const [action,setAction] = useState("Login");
     const [val, setVal] = useState("Name");
     const [icon, setIcon] = useState(spotifyIcon);
+    const [thinking, setThinking] = useState(false);
 
 
     useEffect(() => {
@@ -78,15 +79,15 @@ export function Setup(props)
             songs = [{username: username}]
     
             for (let i = 0; i < data.length; i++) {
-            let rating = 5 - ((i / (data.length - 1)) * 2.5);
-    
-            songs.push({
-                title: data[i].name,
-                uid: data[i].id,
-                year: data[i]["album"]["release_date"].split("-")[0],
-                img: data[i]["album"]["images"][0]["url"],
-                rating: String(rating)
-            })
+                let rating = 5 - ((i / (data.length - 1)) * 2.5);
+        
+                songs.push({
+                    title: data[i].name,
+                    uid: data[i].id,
+                    year: data[i]["album"]["release_date"].split("-")[0],
+                    img: data[i]["album"]["images"][0]["url"],
+                    rating: String(rating)
+                })
             }
         } 
         
@@ -98,8 +99,13 @@ export function Setup(props)
         }
 
         try {
+            setThinking(true);
+            alert("Collecting data... Please wait!");
             // Sends data to Guy's API, which passes into a python script
-            axios.post(`https://incubo.serveo.net/api/v1/people/post-spotify/${goodreads}/${letterboxd}`, songs).then((response) => {});
+            axios.post(`https://incubo.serveo.net/api/v1/people/post-spotify/${goodreads}/${letterboxd}`, songs).then((response) => {
+                setThinking(false);
+            });
+            loginClick();
         } catch (error) {
             console.error(error);
         }
