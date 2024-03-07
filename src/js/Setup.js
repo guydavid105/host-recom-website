@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import {Top} from "./helper/Top";
 import Footer from "./helper/Footer";
 import letterboxd from '../asset/login/letterboxd.png';
@@ -15,20 +14,16 @@ export function Setup(props)
 {
     const [username, setUsername] = useState();
     const [data, setData] = useState();
-
     const [action,setAction] = useState("Login");
     const [val, setVal] = useState("Name");
-
     const [icon, setIcon] = useState(spotifyIcon);
 
-    const handleChange = (event) => {
-        // 👇 Get input value from "event"
-        setVal(event.target.value);
-    };
 
     useEffect(() => {
         if (!data && localStorage.getItem('accessToken')) {
-            setIcon(spotifyTick2);  
+            if (localStorage.getItem('expiresIn') > new Date().getTime()) {
+                setIcon(spotifyTick2);  
+            }
             handleGetPlaylists();
         }
     })
@@ -50,7 +45,6 @@ export function Setup(props)
           });
   
   
-          // console.log(token);
           axios
             .get(PLAYLISTS_ENDPOINT, {
               headers: {
@@ -58,7 +52,6 @@ export function Setup(props)
               },
             })
             .then((response) => {
-            //   console.log(response.data)
               setData(response.data["items"]); 
             })
             .catch((error) => {
@@ -81,22 +74,20 @@ export function Setup(props)
         const spotify = username;
 
         let songs = [];
-        if (spotify){
-            if (data) {
-                songs = [{username: username}]
-                // let songs = [{username: }]
-        
-                for (let i = 0; i < data.length; i++) {
-                let rating = 5 - ((i / data.length) * 2.5);
-        
-                songs.push({
-                    title: data[i].name,
-                    uid: data[i].id,
-                    img: data[i]["album"]["images"][0]["url"],
-                    rating: String(rating)
-                })
-                }
-          }
+        if (spotify && data){
+            songs = [{username: username}]
+    
+            for (let i = 0; i < data.length; i++) {
+            let rating = 5 - ((i / (data.length - 1)) * 2.5);
+    
+            songs.push({
+                title: data[i].name,
+                uid: data[i].id,
+                year: data[i]["album"]["release_date"].split("-")[0],
+                img: data[i]["album"]["images"][0]["url"],
+                rating: String(rating)
+            })
+            }
         } 
         
         if (goodreads === '') {
@@ -106,12 +97,12 @@ export function Setup(props)
             letterboxd = '-'
         }
 
-                
-        // Sends data to Guy's API, which passes into a python script
-        axios.post(`https://incubo.serveo.net/api/v1/people/post-spotify/${goodreads}/${letterboxd}`, songs).then((response) => {
-            console.log(response.data)
-        })
-
+        try {
+            // Sends data to Guy's API, which passes into a python script
+            axios.post(`https://incubo.serveo.net/api/v1/people/post-spotify/${goodreads}/${letterboxd}`, songs).then((response) => {});
+        } catch (error) {
+            console.error(error);
+        }
     }
 
 
@@ -130,25 +121,28 @@ export function Setup(props)
         const goodreads = document.getElementById('goodreads-id').value;
         const spotify = username;
 
-        console.log(letterboxd, goodreads);
+        // console.log(letterboxd, goodreads);
         if(!spotify && letterboxd==='' && goodreads===''){
             alert("Please fill in the information");
         }
         else{
-            if(goodreads !== ''){
-                var url = `https://incubo.serveo.net/api/v1/people/find-by-goodreads-id/${goodreads}`;
-            }
-            else if (spotify){
-                var url = `https://incubo.serveo.net/api/v1/people/find-by-spotify-id/${spotify}`;
-            }
-            else {
-                var url = `https://incubo.serveo.net/api/v1/people/find-by-letterboxd-id/${letterboxd}`;
+            try {
+                if(goodreads !== ''){
+                    var url = `https://incubo.serveo.net/api/v1/people/find-by-goodreads-id/${goodreads}`;
+                }
+                else if (spotify){
+                    var url = `https://incubo.serveo.net/api/v1/people/find-by-spotify-id/${spotify}`;
+                }
+                else {
+                    var url = `https://incubo.serveo.net/api/v1/people/find-by-letterboxd-id/${letterboxd}`;
+                }
+            } catch (error) {
+                console.error(error);
             }
 
             const user_data = async () => {
                 const response = await fetch(url);
                 const data = await response.json();
-                console.log(data);
                 if (data.length === 0) {
                     alert("User not found!");
                     window.location = `/`;
@@ -162,17 +156,17 @@ export function Setup(props)
                 const book_url = `https://incubo.serveo.net/api/v1/people/recomm/book/${user_id}`;
                 const book_response = await fetch(book_url);
                 const book_data = await book_response.json();
-                console.log(book_data);
+                // console.log(book_data);
 
                 const movie_url = `https://incubo.serveo.net/api/v1/people/recomm/movie/${user_id}`;
                 const movie_response = await fetch(movie_url);
                 const movie_data = await movie_response.json();
-                console.log(movie_data);
+                // console.log(movie_data);
 
                 const song_url = `https://incubo.serveo.net/api/v1/people/recomm/song/${user_id}`;
                 const song_response = await fetch(song_url);
                 const song_data = await song_response.json();
-                console.log(song_data);
+                // console.log(song_data);
 
                 if (book_data.length != 0) {
                     localStorage.setItem('book', JSON.stringify(book_data));
@@ -219,7 +213,6 @@ export function Setup(props)
                     <div className="text">{action}</div>
                     <div className="underline"></div>
                 </div>
-                {/* Option to choose from  */}
                 <div className="submit-container">
                     <div className={action==='Login'?"submit":"submit gray"}
                     onClick={()=>{setAction("Login")}}>Login</div> 
