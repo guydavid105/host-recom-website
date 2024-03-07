@@ -38,7 +38,6 @@ let moviecards = [
   { id: 542001, type: "movie", title: "Bros", img: "https://a.ltrbxd.com/resized/film-poster/5/4/2/0/0/1/542001-bros-0-500-0-750-crop.jpg" }
 ];
 
-
 const delay = 2500;
 
 export function Slideshow() {

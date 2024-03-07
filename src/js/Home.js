@@ -2,7 +2,10 @@ import book from '../asset/book.jpg';
 import music from '../asset/music.jpg';
 import movie from '../asset/movie.jpg';
 import music_mp3 from '../asset/audio/Town_of_Windmill.mp3';
-import {Slideshow, SlideshowMovies} from './helper/slideShow';
+//import {Slideshow, SlideshowMovies} from './helper/slideShow';
+//import {Slideshow} from './helper/slideShow';
+import { MovieCarousel } from './helper/MultiItemCarousel';
+import { BookCarousel } from './helper/MultiItemCarousel';
 import { HashLink } from 'react-router-hash-link';
 import Footer from "./helper/Footer";
 import {Top} from "./helper/Top";
@@ -152,13 +155,11 @@ export function Home() {
             <br></br>
         </div>
 
-        <div className="column">
-          <b><i>BOOKS 📖</i> </b>  
-            <Slideshow />
-          </div>
         </div>
-          
-            <SlideshowMovies />
+            <h2><i>BOOKS 📖</i></h2>
+            <BookCarousel />
+            <h2><i>MOVIES 🎬</i></h2>
+            <MovieCarousel />
             </center>
 
             <Footer />
