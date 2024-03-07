@@ -22,9 +22,7 @@ export function Top(){
     return(
     <>
        <center>
-            <h1>
-            Movies x Books x Music Recommendation System
-            </h1>
+            <h4>Movies x Songs x Books</h4>
         </center>
     </>
 )

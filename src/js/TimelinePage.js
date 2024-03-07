@@ -5,7 +5,7 @@ import { ReactComponent as MovieIcon } from "../asset/timeline/movieIcon.svg"
 import { ReactComponent as BookIcon } from "../asset/timeline/bookIcon.svg"
 import { ReactComponent as SongIcon } from "../asset/timeline/songIcon.svg"
 import FooterCommon from "./helper/footerCommom"
-
+import {Top} from "./helper/Top";
 import timelineElements from "./timelineElements"
 
 import {
@@ -47,7 +47,7 @@ export function Timeline() {
             <div className={"home"} onClick={clickHandlerToHome}> 
                 Home
             </div>
-            <h1 className="title">Timeline</h1>
+            <h4>Recommendation Timeline</h4>
             </center>
             <VerticalTimeline>
                 {timelineElements.sort((event1, event2) => (dateComparer(event1, event2))).map(element => {

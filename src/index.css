@@ -12,13 +12,14 @@ body {
   width: 120px;
   height: 50px;
   border: 2px solid #77afe7;
-  border-width:2px;
+  border-width:0px;
   align-items:'center';
   justify-content:'center';
   color: #425871;
   background: #FAC898;
   border-radius:10px;
   padding:10px;
+  box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0.25), 0 0.4em 1.25em 0 rgba(0, 0, 0, 0.15) !important;
 }
 
 .buttonStyle:hover{
@@ -46,6 +47,12 @@ h2{
   shadow: 10px;
 }
 
+h3{
+font-weight:200;
+color: #04395e;
+font-size: 1.5em;
+}
+
 .textStyle{
   color:  #ed7966;
   text-decoration: none !important;
@@ -62,7 +69,17 @@ code {
   text-align: center;
 }
 
-
+h4{
+  font-family:'Raleway', sans-serif;
+  font-size:60px;
+	letter-spacing:0.05em;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: #04d9ff;
+  text-shadow: 
+						2px 2px #150a7a,
+						5px 5px #000000;
+}
 /* Slideshow */
 
 .slideshow {
@@ -117,6 +134,7 @@ code {
   background: #C3B1E1;
   padding-bottom: 30px;
   width:600px;
+  box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0.25), 0 0.4em 1.25em 0 rgba(0, 0, 0, 0.15) !important;
 }
 
 .header{
