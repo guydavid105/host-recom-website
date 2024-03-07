@@ -132,6 +132,7 @@ export function Setup(props)
             alert("Please fill in the information");
         }
         else{
+            alert("Signing you in!");
             try {
                 if(goodreads !== ''){
                     var url = `https://incubo.serveo.net/api/v1/people/find-by-goodreads-id/${goodreads}`;
