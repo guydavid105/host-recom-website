@@ -30,6 +30,9 @@ npm i react-vertical-timeline-component
 ```
 npm i moment
 ```
+```
+npm i react-multi-carousel
+```
 
 ## Scraping:
 
