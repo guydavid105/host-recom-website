@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import reportWebVitals from './reportWebVitals';
+import './src/index.css';
+import reportWebVitals from './src/reportWebVitals';
 
 import { Route,Routes, useLocation,HashRouter as Router} from 'react-router-dom';
 import { AnimatePresence } from "framer-motion";
-import {Home} from "./js/Home";
-import { Example } from './js/ExampleSubpage';
-import { Setup } from './js/Setup';
-import { Timeline } from './js/TimelinePage';
-import { InputItems} from './js/InputItems';
+import {Home} from "./src/js/Home";
+import { Example } from './src/js/ExampleSubpage';
+import { Setup } from './src/js/Setup';
+import { Timeline } from './src/js/TimelinePage';
+import { InputItems} from './src/js/InputItems';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
